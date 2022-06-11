@@ -1,11 +1,11 @@
-const mancPostCodes = [];
+const postcodes = [];
 
 // no m10 post code for reasons
 
 for (let i = 1; i <= 20; i++) {
 	if (i !== 10) {
-		mancPostCodes.push(`M${i}`);
+		postcodes.push(`M${i}`);
 	}
 }
 
-module.exports = mancPostCodes;
+module.exports = postcodes;
