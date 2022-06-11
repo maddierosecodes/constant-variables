@@ -1,0 +1,37 @@
+:root {
+  --lowlight: rgb(65, 64, 66);
+  --primary-color: rgb(149, 149, 244);
+  --highlight: rgb(83, 244, 148);
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+form input {
+  padding: 0.5rem;
+  margin: 0.5rem;
+}
+
+form button {
+  padding: 1rem;
+  margin: 1rem;
+}
+
+#header {
+  padding: 1rem;
+  background-color: var(--primary-color);
+  color: black;
+}
+
+h2 {
+  border-bottom: var(--highlight) 6px solid;
+}
