@@ -1,6 +1,10 @@
 import React from "react";
 
 function PostRide() {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    //function to post the form
+  };
   return (
     <div>
       <h2>Post</h2>
@@ -31,7 +35,9 @@ function PostRide() {
         <label htmlFor="postcode">Postcode</label>
         <input type="text" id="postcode"></input>
 
-        <button type="submit">Post</button>
+        <button type="submit" onClick={handleSubmit}>
+          Post
+        </button>
       </form>
     </div>
   );
