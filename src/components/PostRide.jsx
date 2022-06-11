@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { isValid as isValidPostcode, fix } from "postcode";
 import { UserContext } from "../contexts/User";
 import { postAdvert } from "../firebase/functions/write";
+import { useNavigate } from "react-router-dom";
 
 function PostRide() {
   //   const exampleListing = {
@@ -51,6 +52,7 @@ function PostRide() {
   const [validStates, setValidStates] = useState(initialValidStates);
 
   const { user } = useContext(UserContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (user) {
@@ -74,7 +76,9 @@ function PostRide() {
       date: new Date(advert.date),
       createdAt: new Date(Date.now()),
     };
-    postAdvert(user.isDriver, copyAdvert);
+    postAdvert(user.isDriver, copyAdvert).then(() => {
+      navigate("/home", { replace: true });
+    });
     console.log(copyAdvert);
   };
 
@@ -205,7 +209,7 @@ function PostRide() {
           onBlur={validateInput("email")}
         ></input>
 
-        <label htmlFor="postcodeStart">postcodeStart</label>
+        <label htmlFor="postcodeStart">Starting Point Postcode</label>
         {validStates.postcodeStart === "false" ? (
           <p>Please enter a valid postcodeStart</p>
         ) : null}

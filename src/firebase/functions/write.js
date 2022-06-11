@@ -37,7 +37,7 @@ const exampleListing = {
 
 export const postAdvert = (isDriver, document = exampleListing) => {
   const path = isDriver ? "/app/listings/offers" : "/app/listings/requests";
-  console.log(document, "<<<<<");
+
   return addDoc(collection(db, path), document)
     .then((res) => {
       console.log(res, "success!");
