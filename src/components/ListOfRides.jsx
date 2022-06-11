@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function ListOfRides() {
 const [listItems, setListItems] = useState([]);
 const [isDriver, setIsDriver] = useState(false); // for testing, probably not needed once userContext set up. 
+
+const navigate = useNavigate()
 
   // if(isDriver) fetch from requests collection, else fetch from offers collection
   useEffect(() => {
@@ -35,7 +38,7 @@ function acceptListing(listingID) {
               </p>
               <p>Posted: {new Date(listing.date).toLocaleString()}</p>
               <button onClick={() => acceptListing(listing.id)}>Accept {isDriver ? 'Request' : 'Offer'}</button>
-              <button>View User Profile</button>
+              <button onClick={() => navigate(`/profile/${isDriver ? 'passenger' : 'driver' }/${listing.createdBy}`)} >View User Profile</button>
             </li>
           );
         })}
