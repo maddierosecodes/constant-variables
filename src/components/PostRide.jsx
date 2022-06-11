@@ -88,6 +88,9 @@ function PostRide() {
       <h2>Post</h2>
       <form>
         <label htmlFor="passengers">Passengers</label>
+        {validStates.passengers === "false" ? (
+          <p>Please enter a number between 0 and 7</p>
+        ) : null}
         <input
           value={advert.passengers.toString()}
           onChange={handleChange("passengers")}
@@ -99,6 +102,9 @@ function PostRide() {
         ></input>
 
         <label htmlFor="destination">Destination</label>
+        {validStates.destination === "false" ? (
+          <p>Please enter a valid postcode</p>
+        ) : null}
         <input
           value={advert.destination}
           onChange={handleChange("destination")}
@@ -110,6 +116,9 @@ function PostRide() {
         ></input>
 
         <label htmlFor="dateTime">Date and Time</label>
+        {validStates.dateTime === "false" ? (
+          <p>Pick up time is in the past, please choose a time after now</p>
+        ) : null}
         <input
           type="dateTime-local"
           id="date"
@@ -120,6 +129,9 @@ function PostRide() {
         ></input>
 
         <label htmlFor="email">Email</label>
+        {validStates.email === "false" ? (
+          <p>Please enter a valid email</p>
+        ) : null}
         <input
           type="email"
           id="email"
@@ -130,6 +142,9 @@ function PostRide() {
         ></input>
 
         <label htmlFor="postcode">Postcode</label>
+        {validStates.postcode === "false" ? (
+          <p>Please enter a valid Postcode</p>
+        ) : null}
         <input
           type="text"
           id="postcode"
