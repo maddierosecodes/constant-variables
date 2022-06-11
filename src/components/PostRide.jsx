@@ -1,34 +1,67 @@
 import React, { useContext, useState, useEffect } from "react";
-import { isValid as isValidPostcode, toOutcode } from "postcode";
+import { isValid as isValidPostcode, fix } from "postcode";
 import { UserContext } from "../contexts/User";
+import { postAdvert } from "../firebase/functions/write";
+import { useNavigate } from "react-router-dom";
 
 function PostRide() {
+  //   const exampleListing = {
+  //     body: "Ooh la la, how fancy",
+  //     createdBy: "Joe Mama",
+  //     creatorId: "DlvzNfVsaZXHeRV8dujxHWg3ehD3",
+  //     date: "2022-06-11T23:29",
+  //     destination: "PR9 7LL",
+  //     email: "emilybennett93@hotmail.com",
+  //     passengers: 2,
+  //     postcodeStart: "PR8 4AN",
+  //     status: {
+  //       accepted: true,
+  //       acceptedBy: {
+  //         uid: "C9S2NwGZObPvJ1hmcYdQj2maPy32",
+  //         username: "usera",
+  //       },
+  //     },
+  //   };
   const initialForm = {
+    createdBy: "",
+    creatorId: "",
+    status: {
+      accepted: false,
+      acceptedBy: {
+        uid: "",
+        username: "",
+      },
+    },
+
+    body: "",
     passengers: 0,
     destination: "",
-    dateTime: "",
+    date: "",
     email: "",
-    postcode: "",
+    postcodeStart: "",
   };
   const initialValidStates = {
     passengers: "pending",
     destination: "pending",
-    dateTime: "pending",
+    date: "pending",
     email: "pending",
-    postcode: "pending",
+    postcodeStart: "pending",
   };
 
   const [advert, setAdvert] = useState(initialForm);
   const [validStates, setValidStates] = useState(initialValidStates);
 
   const { user } = useContext(UserContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (user) {
       setAdvert((currentAdvert) => {
         const copy = { ...currentAdvert };
         copy.email = user.email;
-        copy.postcode = user.postcode;
+        copy.postcodeStart = fix(user.postcode);
+        copy.createdBy = user.username;
+        copy.creatorId = user.uid;
         return copy;
       });
     }
@@ -38,8 +71,14 @@ function PostRide() {
     e.preventDefault();
     const copyAdvert = {
       ...advert,
+      destination: fix(advert.destination),
+
+      date: new Date(advert.date),
+      createdAt: new Date(Date.now()),
     };
-    //function to post the form
+    postAdvert(user.isDriver, copyAdvert).then(() => {
+      navigate("/home", { replace: true });
+    });
     console.log(copyAdvert);
   };
 
@@ -70,11 +109,11 @@ function PostRide() {
           }
         }
 
-        if (key === "dateTime") {
-          if (new Date(advert.dateTime) > Date.now()) {
-            copyStates.dateTime = "true";
+        if (key === "date") {
+          if (new Date(advert.date) > Date.now()) {
+            copyStates.date = "true";
           } else {
-            copyStates.dateTime = "false";
+            copyStates.date = "false";
           }
         }
 
@@ -96,14 +135,14 @@ function PostRide() {
           }
         }
 
-        if (key === "postcode") {
+        if (key === "postcodeStart") {
           if (
-            isValidPostcode(advert.postcode) ||
-            advert.postcode.trim() === user.postcode
+            isValidPostcode(advert.postcodeStart) ||
+            advert.postcodeStart.trim() === user.postcodeStart
           ) {
-            copyStates.postcode = "true";
+            copyStates.postcodeStart = "true";
           } else {
-            copyStates.postcode = "false";
+            copyStates.postcodeStart = "false";
           }
         }
         return copyStates;
@@ -132,28 +171,28 @@ function PostRide() {
 
         <label htmlFor="destination">Destination</label>
         {validStates.destination === "false" ? (
-          <p>Please enter a valid postcode</p>
+          <p>Please enter a valid postcodeStart</p>
         ) : null}
         <input
           value={advert.destination}
           onChange={handleChange("destination")}
           onBlur={validateInput("destination")}
           type="text"
-          placeholder="What is the full postcode?"
+          placeholder="What is the full postcodeStart?"
           id="destination"
           required={true}
         ></input>
 
-        <label htmlFor="dateTime">Date and Time</label>
-        {validStates.dateTime === "false" ? (
+        <label htmlFor="date">Date and Time</label>
+        {validStates.date === "false" ? (
           <p>Pick up time is in the past, please choose a time after now</p>
         ) : null}
         <input
-          type="dateTime-local"
+          type="datetime-local"
           id="date"
-          value={advert.dateTime}
-          onChange={handleChange("dateTime")}
-          onBlur={validateInput("dateTime")}
+          value={advert.date}
+          onChange={handleChange("date")}
+          onBlur={validateInput("date")}
           required={true}
         ></input>
 
@@ -170,18 +209,30 @@ function PostRide() {
           onBlur={validateInput("email")}
         ></input>
 
-        <label htmlFor="postcode">Postcode</label>
-        {validStates.postcode === "false" ? (
-          <p>Please enter a valid Postcode</p>
+        <label htmlFor="postcodeStart">Starting Point Postcode</label>
+        {validStates.postcodeStart === "false" ? (
+          <p>Please enter a valid postcodeStart</p>
         ) : null}
         <input
           type="text"
-          id="postcode"
-          value={advert.postcode}
-          onChange={handleChange("postcode")}
-          onBlur={validateInput("postcode")}
+          id="postcodeStart"
+          value={advert.postcodeStart}
+          onChange={handleChange("postcodeStart")}
+          onBlur={validateInput("postcodeStart")}
           required={true}
         ></input>
+
+        <label htmlFor="body">Description</label>
+        <textarea
+          type="textarea"
+          rows={4}
+          cols={20}
+          id="body"
+          value={advert.body}
+          onChange={handleChange("body")}
+          onBlur={validateInput("body")}
+          required={true}
+        ></textarea>
 
         <button type="submit" onClick={handleSubmit}>
           Post

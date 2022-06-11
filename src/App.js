@@ -1,3 +1,4 @@
+
 import './App.css';
 import { useState } from 'react';
 import { Route, Routes, Link } from 'react-router-dom';
@@ -14,27 +15,28 @@ import PostRide from "./components/PostRide";
 
 function App() {
   const [user, setUser] = useState({
-    username: 'Ira Martinez',
-    role: 'driver',
-    postcode: 'm1',
+    username: "Ira Martinez",
+    isDriver: true,
+    postcode: "PR9 7LL",
     isLoggedIn: false,
-    email: "ira.martinez@gmail.com"
+    email: "ira.martinez@gmail.com",
+    uid: "DlvzNfVsaZXHeRV8dujxHWg3ehD3",
   });
   return (
     <UserContext.Provider value={{ user, setUser }}>
-      <main className='App'>
+      <main className="App">
         <Header />
 
         <nav>
           <Link
-            className='f4 fw6 db purple no-underline underline-hover'
-            to='/login'
+            className="f4 fw6 db purple no-underline underline-hover"
+            to="/login"
           >
-            {user.isLoggedIn ? '' : 'Log in here'}
+            {user.isLoggedIn ? "" : "Log in here"}
           </Link>
         </nav>
 
-        <Routes>
+
           <Route path='/login' element={<Login />} />
           <Route path='/home' element={<Homepage />} />
           <Route path='/rides' element={<ListOfRides />} />
@@ -43,6 +45,7 @@ function App() {
           <Route path='/profile/passenger/:userID' element={<PassengerProfilePage />} />
 
             <Route path="/post" element={<PostRide />} />
+
 
         </Routes>
       </main>
