@@ -38,6 +38,18 @@ a {
   text-align: center;
 }
 
+section {
+  padding: 0.5rem;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -58,4 +70,23 @@ form button {
 
 .login-form {
   margin-top: 5rem;
+}
+
+#profile-section p {
+  font-size: 1.2rem;
+  margin: 0.4rem;
+}
+
+.ride-link {
+  border: dashed 1px var(--lowlight);
+  padding: 0.5rem;
+  width: 50%;
+  margin: 0.5rem auto;
+}
+
+#profile-img {
+  max-width: 200px;
+  border-radius: 1rem;
+  margin: 1rem;
+  border: 2px solid var(--lowlight);
 }
