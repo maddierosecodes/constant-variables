@@ -36,8 +36,6 @@ function App() {
           <Route path='/home' element={<Homepage />} />
           <Route path='/rides' element={<ListOfRides />} />
             <Route path="/post" element={<PostRide />} />
-              
-
         </Routes>
       </main>
     </UserContext.Provider>
