@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { isValid, isValid as isValidPostcode, toOutcode } from "postcode";
+import React, { useContext, useState, useEffect } from "react";
+import { isValid as isValidPostcode, toOutcode } from "postcode";
+import { UserContext } from "../contexts/User";
 
 function PostRide() {
   const initialForm = {
@@ -19,6 +20,18 @@ function PostRide() {
 
   const [advert, setAdvert] = useState(initialForm);
   const [validStates, setValidStates] = useState(initialValidStates);
+
+  const { user } = useContext(UserContext);
+
+  useEffect(() => {
+    if (user) {
+      setAdvert((currentAdvert) => {
+        const copy = { ...currentAdvert };
+        copy.email = user.email;
+        return copy;
+      });
+    }
+  }, [user]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

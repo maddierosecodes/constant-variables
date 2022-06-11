@@ -12,6 +12,7 @@ function App() {
     username: "Ira Martinez",
     role: "driver",
     postcode: "m1",
+    email: "ira.martinez@gmail.com",
   });
   return (
     <UserContext.Provider value={{ user, setUser }}>
