@@ -59,3 +59,10 @@ form button {
 .login-form {
   margin-top: 5rem;
 }
+
+.ride-card {
+  padding: 1rem;
+  margin: 1rem;
+  list-style: none;
+  border: 2px black solid;
+}
