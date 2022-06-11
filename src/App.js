@@ -13,7 +13,7 @@ function App() {
   const [user, setUser] = useState({
     username: "Ira Martinez",
     isDriver: true,
-    postcode: "m1",
+    postcode: "PR9 7LL",
     isLoggedIn: false,
     email: "ira.martinez@gmail.com",
     uid: "DlvzNfVsaZXHeRV8dujxHWg3ehD3",

@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { isValid as isValidPostcode } from "postcode";
+import { isValid as isValidPostcode, fix } from "postcode";
 import { UserContext } from "../contexts/User";
 import { postAdvert } from "../firebase/functions/write";
 
@@ -57,7 +57,7 @@ function PostRide() {
       setAdvert((currentAdvert) => {
         const copy = { ...currentAdvert };
         copy.email = user.email;
-        copy.postcodeStart = user.postcode;
+        copy.postcodeStart = fix(user.postcode);
         copy.createdBy = user.username;
         copy.creatorId = user.uid;
         return copy;
@@ -69,6 +69,8 @@ function PostRide() {
     e.preventDefault();
     const copyAdvert = {
       ...advert,
+      destination: fix(advert.destination),
+
       date: new Date(advert.date),
       createdAt: new Date(Date.now()),
     };
