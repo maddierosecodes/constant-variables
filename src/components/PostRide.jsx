@@ -1,7 +1,7 @@
 import React from "react";
 
 function PostRide() {
-  return <div>PostRide</div>;
+  return <div></div>;
 }
 
 export default PostRide;
