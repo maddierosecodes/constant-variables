@@ -34,13 +34,9 @@ export default function Login() {
           id='password'
         />
 
-        <label class='pa0 ma0 lh-copy f6 pointer'>
-          <input type='checkbox' /> Remember me
-        </label>
-
         <button
           onClick={handleSubmit}
-          className='f6 link dim ph3 pv2 mb2 dib white bg-black'
+          className='f6 link  ph3 pv2 mb2 dib white bg-black'
         >
           Log in
         </button>
