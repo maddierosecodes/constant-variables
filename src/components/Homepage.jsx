@@ -31,7 +31,7 @@ export default function Homepage() {
         </Link>
         <Link
           className='ride-link f4 fw6 db black link hover-purple underline-hover'
-          to='/view-rides'
+          to='/rides'
         >
           View all rides
         </Link>

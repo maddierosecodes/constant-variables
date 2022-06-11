@@ -6,6 +6,7 @@ import Login from './components/Login';
 import Header from './components/Header';
 import Homepage from './components/Homepage';
 import ListOfRides from './components/ListOfRides';
+import DriverReview from './components/DriverProfile';
 
 function App() {
   const [user, setUser] = useState({
