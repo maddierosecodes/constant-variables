@@ -11,20 +11,27 @@ function App() {
     username: 'Ira Martinez',
     role: 'driver',
     postcode: 'm1',
+    isLoggedIn: false,
   });
   return (
     <UserContext.Provider value={{ user, setUser }}>
-      <div className='App'>
+      <main className='App'>
         <Header />
-        <p>
-          <Link to='/login'>Log in here</Link>
-        </p>
+
+        <nav>
+          <Link
+            className='f4 fw6 db purple no-underline underline-hover'
+            to='/login'
+          >
+            {user.isLoggedIn ? '' : 'Log in here'}
+          </Link>
+        </nav>
+
         <Routes>
-          <Route path='/login' element={<Login />} />
           <Route path='/login' element={<Login />} />
           <Route path='/home' element={<Homepage />} />
         </Routes>
-      </div>
+      </main>
     </UserContext.Provider>
   );
 }

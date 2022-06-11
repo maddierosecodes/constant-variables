@@ -1,11 +1,50 @@
+import { Link, useNavigate } from 'react-router-dom';
+
 export default function Login() {
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate('/home', { replace: true });
+  };
+
   return (
-    <form action='post'>
-      <label htmlFor='username'>Username</label>
-      <input type='text' id='username' name='username' />
-      <label htmlFor='password'>Password</label>
-      <input type='password' id='password' name='password' />
-      <button>Log in</button>
-    </form>
+    <section>
+      <Link className='f4 fw6 db purple no-underline underline-hover' to='/'>
+        Back to homepage
+      </Link>
+      <form class='measure center login-form'>
+        <label class='db fw6 lh-copy f6' for='email-address'>
+          Email
+        </label>
+        <input
+          class='pa2 input-reset ba bg-transparent hover-bg-black hover-yellow w-100'
+          type='email'
+          name='email-address'
+          id='email-address'
+        />
+
+        <label class='db fw6 lh-copy f6' for='password'>
+          Password
+        </label>
+        <input
+          class='b pa2 input-reset ba bg-transparent hover-bg-black hover-yellow w-100'
+          type='password'
+          name='password'
+          id='password'
+        />
+
+        <label class='pa0 ma0 lh-copy f6 pointer'>
+          <input type='checkbox' /> Remember me
+        </label>
+
+        <button
+          onClick={handleSubmit}
+          className='f6 link dim ph3 pv2 mb2 dib white bg-black'
+        >
+          Log in
+        </button>
+      </form>
+    </section>
   );
 }
