@@ -34,3 +34,10 @@ form button {
 h2 {
   border-bottom: var(--highlight) 6px solid;
 }
+
+.ride-card {
+  padding: 1rem;
+  margin: 1rem;
+  list-style: none;
+  border: 2px black solid;
+}
