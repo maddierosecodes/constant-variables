@@ -8,13 +8,14 @@ const writeData = (path, data) => {
 
 const drivers = createDrivers(1);
 const passengers = createPassengers(1);
-
+// replace local path with desired driver data location
 writeData(
-  '/Users/maddiehughes/Code/projects/constant-variables/src/dummy-data/local-data/seed-data/drivers.js',
+  'local path',
   'export const drivers = ' + JSON.stringify(drivers, null, 2)
 );
 
+// replace local path with desired passenger data location
 writeData(
-  '/Users/maddiehughes/Code/projects/constant-variables/src/dummy-data/local-data/seed-data/passengers.js',
+  'local path',
   'export const passengers = ' + JSON.stringify(passengers, null, 2)
 );
