@@ -27,6 +27,4 @@ function createDrivers(amount) {
 	return drivers;
 }
 
-console.log(createDrivers(5));
-
 module.exports = createDrivers;
