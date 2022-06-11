@@ -2,9 +2,16 @@ import logo from './logo.svg';
 import './App.css';
 import db from './firebase';
 import { seedUsers, seedListings } from './dummy-data/seed';
+import { useEffect } from 'react';
+import { drivers } from './dummy-data/local-data/seed-data/drivers';
+import { passengers } from './dummy-data/local-data/seed-data/passengers';
 
 function App() {
-  seedListings([{ test: 'test' }], 'app/listings/requests');
+
+    seedUsers(drivers, 'app/users/drivers');
+    seedUsers(passengers, 'app/users/passengers');
+
+
   return (
     <div className="App">
       <header className="App-header">
