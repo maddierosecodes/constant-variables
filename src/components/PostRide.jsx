@@ -28,6 +28,7 @@ function PostRide() {
       setAdvert((currentAdvert) => {
         const copy = { ...currentAdvert };
         copy.email = user.email;
+        copy.postcode = user.postcode;
         return copy;
       });
     }
@@ -35,7 +36,9 @@ function PostRide() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const copyAdvert = { ...advert, postcode: toOutcode(advert.postcode) };
+    const copyAdvert = {
+      ...advert,
+    };
     //function to post the form
     console.log(copyAdvert);
   };
@@ -75,11 +78,11 @@ function PostRide() {
           }
         }
 
-        if (key === "destination" || key === "postcode") {
+        if (key === "destination") {
           if (isValidPostcode(advert.destination)) {
-            copyStates[key] = "true";
+            copyStates.destination = "true";
           } else {
-            copyStates[key] = "false";
+            copyStates.destination = "false";
           }
         }
 
@@ -90,6 +93,17 @@ function PostRide() {
             copyStates.email = "true";
           } else {
             copyStates.email = "false";
+          }
+        }
+
+        if (key === "postcode") {
+          if (
+            isValidPostcode(advert.postcode) ||
+            advert.postcode.trim() === user.postcode
+          ) {
+            copyStates.postcode = "true";
+          } else {
+            copyStates.postcode = "false";
           }
         }
         return copyStates;
