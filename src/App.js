@@ -6,8 +6,11 @@ import Login from './components/Login';
 import Header from './components/Header';
 import Homepage from './components/Homepage';
 import ListOfRides from './components/ListOfRides';
+import DriverProfilePage from './components/DriverProfilePage';
+import PassengerProfilePage from './components/PassengerProfilePage';
 import DriverReview from './components/DriverProfile';
 import PostRide from "./components/PostRide";
+
 
 function App() {
   const [user, setUser] = useState({
@@ -35,7 +38,12 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/home' element={<Homepage />} />
           <Route path='/rides' element={<ListOfRides />} />
+
+          <Route path='/profile/driver/:userID' element={<DriverProfilePage />} />
+          <Route path='/profile/passenger/:userID' element={<PassengerProfilePage />} />
+
             <Route path="/post" element={<PostRide />} />
+
         </Routes>
       </main>
     </UserContext.Provider>
