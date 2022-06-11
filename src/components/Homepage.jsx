@@ -1,10 +1,16 @@
 import { useContext } from 'react';
 import { UserContext } from '../contexts/User';
+import { Link } from 'react-router-dom';
 
 export default function Homepage() {
   const { user } = useContext(UserContext);
   return (
     <section>
+      <nav>
+        <Link className='f4 fw6 db purple no-underline underline-hover' to='/'>
+          Back to homepage
+        </Link>
+      </nav>
       <header>
         <h2>Hello, {user.username}</h2>
       </header>
