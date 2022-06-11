@@ -1,8 +1,8 @@
-:root {
+/* :root {
   --lowlight: rgb(65, 64, 66);
   --primary-color: rgb(149, 149, 244);
   --highlight: rgb(83, 244, 148);
-}
+} */
 
 * {
   box-sizing: border-box;
@@ -28,7 +28,6 @@ form button {
 
 #header {
   padding: 1rem;
-  background-color: var(--primary-color);
   color: black;
 }
 
