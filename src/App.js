@@ -1,17 +1,14 @@
-
-import './App.css';
-import { useState } from 'react';
-import { Route, Routes, Link } from 'react-router-dom';
-import { UserContext } from './contexts/User';
-import Login from './components/Login';
-import Header from './components/Header';
-import Homepage from './components/Homepage';
-import ListOfRides from './components/ListOfRides';
-import DriverProfilePage from './components/DriverProfilePage';
-import PassengerProfilePage from './components/PassengerProfilePage';
-import DriverReview from './components/DriverProfile';
+import "./App.css";
+import { useState } from "react";
+import { Route, Routes, Link } from "react-router-dom";
+import { UserContext } from "./contexts/User";
+import Login from "./components/Login";
+import Header from "./components/Header";
+import Homepage from "./components/Homepage";
+import ListOfRides from "./components/ListOfRides";
+import DriverProfilePage from "./components/DriverProfilePage";
+import PassengerProfilePage from "./components/PassengerProfilePage";
 import PostRide from "./components/PostRide";
-
 
 function App() {
   const [user, setUser] = useState({
@@ -36,17 +33,21 @@ function App() {
           </Link>
         </nav>
 
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/home" element={<Homepage />} />
+          <Route path="/rides" element={<ListOfRides />} />
 
-          <Route path='/login' element={<Login />} />
-          <Route path='/home' element={<Homepage />} />
-          <Route path='/rides' element={<ListOfRides />} />
+          <Route
+            path="/profile/driver/:userID"
+            element={<DriverProfilePage />}
+          />
+          <Route
+            path="/profile/passenger/:userID"
+            element={<PassengerProfilePage />}
+          />
 
-          <Route path='/profile/driver/:userID' element={<DriverProfilePage />} />
-          <Route path='/profile/passenger/:userID' element={<PassengerProfilePage />} />
-
-            <Route path="/post" element={<PostRide />} />
-
-
+          <Route path="/post" element={<PostRide />} />
         </Routes>
       </main>
     </UserContext.Provider>
