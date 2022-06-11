@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { isValid, isValid as isValidPostcode } from "postcode";
+import { isValid, isValid as isValidPostcode, toOutcode } from "postcode";
 
 function PostRide() {
   const initialForm = {
@@ -22,7 +22,9 @@ function PostRide() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const copyAdvert = { ...advert, postcode: toOutcode(advert.postcode) };
     //function to post the form
+    console.log(copyAdvert);
   };
 
   const handleChange = (key) => {
