@@ -6,7 +6,7 @@ const genders = ["male", "female", "non-binary"];
 function createDrivers(amount) {
 	const drivers = [];
 
-	for (let i = 0; i <= amount; i++) {
+	for (let i = 0; i < amount; i++) {
 		const driver = {
 			username: faker.internet.userName(),
 			ageGroup: ageGroups[Math.floor(Math.random() * (0 - 2 + 1) + 2)],

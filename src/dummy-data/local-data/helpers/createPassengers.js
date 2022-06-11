@@ -6,7 +6,7 @@ const genders = ["male", "female", "non-binary"];
 function createPassengers(amount) {
 	const passengers = [];
 
-	for (let i = 0; i <= amount; i++) {
+	for (let i = 0; i < amount; i++) {
 		const passenger = {
 			username: faker.internet.userName(),
 			ageGroup: ageGroups[Math.floor(Math.random() * (0 - 3 + 1) + 3)],
