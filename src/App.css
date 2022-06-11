@@ -72,6 +72,7 @@ form button {
   margin-top: 5rem;
 }
 
+
 #profile-section p {
   font-size: 1.2rem;
   margin: 0.4rem;
@@ -90,3 +91,11 @@ form button {
   margin: 1rem;
   border: 2px solid var(--lowlight);
 }
+
+.ride-card {
+  padding: 1rem;
+  margin: 1rem;
+  list-style: none;
+  border: 2px black solid;
+}
+
