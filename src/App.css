@@ -1,8 +1,10 @@
-/* :root {
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Josefin+Sans&display=swap');
+
+:root {
   --lowlight: rgb(65, 64, 66);
   --primary-color: rgb(149, 149, 244);
   --highlight: rgb(83, 244, 148);
-} */
+}
 
 * {
   box-sizing: border-box;
@@ -10,15 +12,48 @@
   margin: 0;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+a,
+p {
+  font-family: 'Lato', sans-serif;
+}
+
+h2 {
+  border-bottom: var(--highlight) 6px solid;
+}
+
+a {
+  margin: 0.5rem;
+}
+
+.App {
+  text-align: center;
+}
+
+section {
+  padding: 0.5rem;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
 form {
   display: flex;
   flex-direction: column;
   padding: 1rem;
-}
-
-form input {
-  padding: 0.5rem;
-  margin: 0.5rem;
 }
 
 form button {
@@ -28,9 +63,39 @@ form button {
 
 #header {
   padding: 1rem;
+  margin-bottom: 5rem;
+  background-color: var(--primary-color);
   color: black;
 }
 
-h2 {
-  border-bottom: var(--highlight) 6px solid;
+.login-form {
+  margin-top: 5rem;
 }
+
+
+#profile-section p {
+  font-size: 1.2rem;
+  margin: 0.4rem;
+}
+
+.ride-link {
+  border: dashed 1px var(--lowlight);
+  padding: 0.5rem;
+  width: 50%;
+  margin: 0.5rem auto;
+}
+
+#profile-img {
+  max-width: 200px;
+  border-radius: 1rem;
+  margin: 1rem;
+  border: 2px solid var(--lowlight);
+}
+
+.ride-card {
+  padding: 1rem;
+  margin: 1rem;
+  list-style: none;
+  border: 2px black solid;
+}
+
