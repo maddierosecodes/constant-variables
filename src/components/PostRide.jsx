@@ -1,6 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 
 function PostRide() {
+  const initialForm = {
+    passengers: 0,
+    destination: "",
+    date: "",
+    time: "",
+    email: "",
+    postcode: "",
+  };
+
+  const { advert, setAdvert } = useState(initialForm);
   const handleSubmit = (e) => {
     e.preventDefault();
     //function to post the form
