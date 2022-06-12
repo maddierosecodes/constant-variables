@@ -61,14 +61,6 @@ export default function Homepage() {
   return (
     <>
       <section id="profile-section">
-        <nav>
-          <Link
-            className="f4 fw6 db purple no-underline underline-hover"
-            to="/"
-          >
-            Back to homepage
-          </Link>
-        </nav>
         <header>
           <h2>Hello, {user.username}</h2>
         </header>
