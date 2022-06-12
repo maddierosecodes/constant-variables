@@ -23,6 +23,18 @@ export default function Homepage() {
   useEffect(() => {
     if (user.uid) {
       fetchListingsByUserID(user.isDriver, user.uid).then((listings) => {
+        listings.sort((a, b) => {
+          if (a.interestedUserObjs.length > b.interestedUserObjs.length) {
+            return -1;
+          } else if (
+            a.interestedUserObjs.length < b.interestedUserObjs.length
+          ) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });
+        console.log(listings);
         setUserPosts(listings);
         setIsLoading(false);
       });
