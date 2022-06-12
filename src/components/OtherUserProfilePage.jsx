@@ -34,7 +34,7 @@ export default function ProfilePage() {
       <img id="profile-img" src={profilePlaceholder} alt="user profile" />
       <h3>{profileInfo.firstName}</h3>
       <p>
-        Rating:{" "}Î
+        Rating:{" "}
         {profileInfo.rating ? `${profileInfo.rating}/5` : "not yet rated"}
       </p>
       <p>{profileInfo.profile}</p>
