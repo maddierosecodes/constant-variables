@@ -27,7 +27,6 @@ export default function ListOfRides() {
         {listItems.map((listing) => {
           return (
             <li className="ride-card" key={listing.uid}>
-              <p>{listing.title}</p>
               <p>
                 Posted By:
                 <Link
