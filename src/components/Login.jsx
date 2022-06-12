@@ -5,7 +5,7 @@ export default function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate('/home', { replace: true });
+    navigate('/home', { replace: false });
   };
 
   return (
@@ -18,7 +18,7 @@ export default function Login() {
           Email
         </label>
         <input
-          class='pa2 input-reset ba bg-transparent hover-bg-black hover-yellow w-100'
+          class='pa2 input-reset ba bg-transparent w-100'
           type='email'
           name='email-address'
           id='email-address'
@@ -28,7 +28,7 @@ export default function Login() {
           Password
         </label>
         <input
-          class='b pa2 input-reset ba bg-transparent hover-bg-black hover-yellow w-100'
+          class='b pa2 input-reset ba bg-transparent w-100'
           type='password'
           name='password'
           id='password'

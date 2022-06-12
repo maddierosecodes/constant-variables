@@ -69,12 +69,25 @@ form button {
 }
 
 .login-form {
-  margin-top: 5rem;
+  margin-top: 2rem;
 }
 
+.info {
+  padding: 2rem;
+  margin: 1rem;
+  background-color: var(--highlight);
+}
 
 #profile-section p {
   font-size: 1.2rem;
+  margin: 0.4rem;
+}
+
+.postcode-err {
+  background-color: yellow;
+  color: black;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
   margin: 0.4rem;
 }
 
@@ -91,11 +104,3 @@ form button {
   margin: 1rem;
   border: 2px solid var(--lowlight);
 }
-
-.ride-card {
-  padding: 1rem;
-  margin: 1rem;
-  list-style: none;
-  border: 2px black solid;
-}
-
