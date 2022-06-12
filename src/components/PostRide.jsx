@@ -25,13 +25,9 @@ function PostRide() {
   const initialForm = {
     createdBy: "",
     creatorId: "",
-    status: {
-      accepted: false,
-      acceptedBy: {
-        uid: "",
-        username: "",
-      },
-    },
+    statusAccepted: false,
+    acceptedByID: "",
+    acceptedByUsername: "",
 
     body: "",
     passengers: 0,
