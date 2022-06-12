@@ -18,7 +18,6 @@ export default function SingleAdPage() {
 
   useEffect(() => {
     fetchSingleListing(rideID, type).then((info) => {
-      console.log(info, "<<<<");
       setListingInfo(info);
       setIsLoading(false);
     });

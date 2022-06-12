@@ -75,7 +75,6 @@ function PostRide() {
     postAdvert(user.isDriver, copyAdvert).then(() => {
       navigate("/home", { replace: true });
     });
-    console.log(copyAdvert);
   };
 
   const handleChange = (key) => {
@@ -93,7 +92,6 @@ function PostRide() {
 
   const validateInput = (key) => {
     const validateInputByKey = () => {
-      console.log(key);
       setValidStates((currentValidStates) => {
         const copyStates = { ...currentValidStates };
 
@@ -149,7 +147,7 @@ function PostRide() {
 
   return (
     <div>
-      <h2>Post</h2>
+      <h2 className="title-text">Post</h2>
       <form className="post-form">
         <label className="label-text" htmlFor="passengers">
           Passengers
@@ -254,7 +252,7 @@ function PostRide() {
           required={true}
         ></textarea>
 
-        <button type="submit" onClick={handleSubmit}>
+        <button type="submit" className="post-button" onClick={handleSubmit}>
           Post
         </button>
       </form>

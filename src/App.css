@@ -36,6 +36,13 @@ h2 {
   border-bottom: var(--highlight) 6px solid;
 }
 
+.title-text {
+  width: 75vw;
+  margin: auto;
+  border-bottom: var(--green) 2px solid;
+  border-radius: 5px;
+}
+
 a {
   margin: 0.5rem;
 }
@@ -45,7 +52,7 @@ a {
 }
 
 section {
-  padding: 0.5rem;
+  /* padding: 0.5rem; */
 }
 
 button {
@@ -72,7 +79,7 @@ form button {
   margin-bottom: 1rem;
   background-color: var(--pinkHighlight);
   color: var(--textColor);
-  height: 7rem;
+  height: 7.786rem;
 }
 
 .login-form {
@@ -133,6 +140,7 @@ form button {
   font-family: "Ubuntu Condensed", sans-serif;
   text-decoration: none;
   color: var(--textColor);
+  padding-top: 0.7rem;
 }
 
 .navBar {
@@ -159,6 +167,7 @@ form button {
   margin-bottom: 5px;
   font-weight: bold;
   font-size: large;
+  color: var(--textColor);
 }
 
 .err-text {
@@ -170,4 +179,36 @@ form button {
 
 .card-button {
   margin-bottom: 10px;
+  border-radius: 10px;
+  height: fit-content;
+  width: fit-content;
+  padding: 5px;
+  margin-top: 10px;
+  margin-right: 7px;
+  margin-left: 7px;
+  background-color: var(--highlight);
+  border: var(--highlight) 3px outset;
+  font-weight: 500;
+  color: var(--textColor);
+}
+
+.post-button {
+  border-radius: 10px;
+  background-color: var(--pinkHighlight);
+  font-size: 2.2rem;
+  border: var(--highlight) 6px outset;
+  color: var(--textColor);
+  font-weight: bold;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.ride-subtitle {
+  width: 70vw;
+  margin: auto;
+  border-bottom: var(--green) 1px solid;
 }

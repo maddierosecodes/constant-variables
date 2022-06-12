@@ -1,3 +1,4 @@
+import { toOutcode } from "postcode";
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../contexts/User";
@@ -10,7 +11,6 @@ export default function ListOfRides() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("hi");
     const collectionName = user.isDriver ? "requests" : "offers";
     fetchListings(collectionName).then((listings) => {
       setListItems(listings);
@@ -19,7 +19,9 @@ export default function ListOfRides() {
 
   return (
     <div>
-      <h2>List of {user.isDriver ? "Requests" : "Offers"}</h2>
+      <h2 className="title-text">
+        List of {user.isDriver ? "Requests" : "Offers"}
+      </h2>
 
       {listItems.map((listing) => {
         return (
@@ -40,35 +42,37 @@ export default function ListOfRides() {
               </Link>
             </p>
             <p>
-              Journey Start: {listing.postcodeStart} Destination:{" "}
+              Journey Start: {toOutcode(listing.postcodeStart)} Destination:{" "}
               {listing.destination}
             </p>
+            <p>Leaving at: {new Date(listing.date * 1000).toLocaleString()}</p>
             <p>Posted: {new Date(listing.createdAt * 1000).toLocaleString()}</p>
-            <p>
-              Date and time: {new Date(listing.date * 1000).toLocaleString()}
-            </p>
-            <button
-              className="card-button"
-              onClick={() =>
-                navigate(
-                  `/rides/${user.isDriver ? "request" : "offer"}/${listing.uid}`
-                )
-              }
-            >
-              More Information
-            </button>
-            <button
-              className="card-button"
-              onClick={() =>
-                navigate(
-                  `/profile/${user.isDriver ? "passenger" : "driver"}/${
-                    listing.creatorId
-                  }`
-                )
-              }
-            >
-              View User Profile
-            </button>
+            <div className="button-container">
+              <button
+                className="card-button"
+                onClick={() =>
+                  navigate(
+                    `/rides/${user.isDriver ? "request" : "offer"}/${
+                      listing.uid
+                    }`
+                  )
+                }
+              >
+                More Information
+              </button>
+              <button
+                className="card-button"
+                onClick={() =>
+                  navigate(
+                    `/profile/${user.isDriver ? "passenger" : "driver"}/${
+                      listing.creatorId
+                    }`
+                  )
+                }
+              >
+                View User Profile
+              </button>
+            </div>
           </section>
         );
       })}

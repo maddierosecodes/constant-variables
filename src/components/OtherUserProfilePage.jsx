@@ -9,11 +9,8 @@ export default function OtherUserProfilePage() {
   const [profileInfo, setProfileInfo] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
-  console.log(role);
-
   useEffect(() => {
     getOtherProfile(userID, role).then((userInfo) => {
-      console.log({ userInfo });
       setProfileInfo(userInfo);
       setIsLoading(false);
     });

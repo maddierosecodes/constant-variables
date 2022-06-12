@@ -36,12 +36,9 @@ export const getProfile = (uid) => {
 };
 
 export const getOtherProfile = (uid, role) => {
-  console.log("uid, role: ", uid, role);
   return getDoc(doc(db, `/app/users/${role}s`, uid))
     .then((doc) => {
-      console.log({ doc });
       const data = doc.data();
-      console.log(data, "<<<<<<<<<<<<<<<,");
 
       data.uid = doc.id;
 
@@ -59,22 +56,20 @@ export const fetchListings = (collectionName) => {
 
   return getDocs(listingsQuery).then((snapshots) => {
     const adList = [];
-    console.log(snapshots);
+
     snapshots.forEach((doc) => {
-      console.log(doc);
       const data = doc.data();
       data.uid = doc.id;
       data.createdAt = data.createdAt.seconds;
       data.date = data.date.seconds;
       adList.push(data);
     });
-    console.log(adList);
+
     return adList;
   });
 };
 
 export const fetchSingleListing = (rideID, type) => {
-  console.log("rideID, type: ", rideID, type);
   return getDoc(doc(db, `/app/listings/${type}s`, rideID))
     .then((doc) => {
       const data = doc.data();
@@ -83,14 +78,12 @@ export const fetchSingleListing = (rideID, type) => {
       data.date = data.date.seconds;
       data.uid = doc.id;
 
-      console.log("data: ", data);
       return data;
     })
     .catch((err) => console.log(err));
 };
 
 export const fetchListingsByUserID = (isDriver, uid) => {
-  console.log({ isDriver, uid });
   const listingsRef = collection(
     db,
     `/app/listings/${isDriver ? "offers" : "requests"}`
@@ -99,22 +92,20 @@ export const fetchListingsByUserID = (isDriver, uid) => {
 
   return getDocs(listingsQuery).then((snapshots) => {
     const adList = [];
-    console.log(snapshots);
+
     snapshots.forEach((doc) => {
-      console.log(doc);
       const data = doc.data();
       data.uid = doc.id;
       data.createdAt = data.createdAt.seconds;
       data.date = data.date.seconds;
       adList.push(data);
     });
-    console.log(adList);
+
     return adList;
   });
 };
 
 export const fetchAcceptedListingsByUserID = (isDriver, uid) => {
-  console.log({ isDriver, uid });
   const listingsRef = collection(
     db,
     `/app/listings/${isDriver ? "requests" : "offers"}`
@@ -123,22 +114,20 @@ export const fetchAcceptedListingsByUserID = (isDriver, uid) => {
 
   return getDocs(listingsQuery).then((snapshots) => {
     const adList = [];
-    console.log(snapshots, "here!");
+
     snapshots.forEach((doc) => {
-      console.log(doc, "?");
       const data = doc.data();
       data.uid = doc.id;
       data.createdAt = data.createdAt.seconds;
       data.date = data.date.seconds;
       adList.push(data);
     });
-    console.log(adList);
+
     return adList;
   });
 };
 
 export const fetchPendingListingsByUserID = (isDriver, uid) => {
-  console.log({ isDriver, uid });
   const listingsRef = collection(
     db,
     `/app/listings/${isDriver ? "requests" : "offers"}`
@@ -150,21 +139,19 @@ export const fetchPendingListingsByUserID = (isDriver, uid) => {
 
   return getDocs(listingsQuery).then((snapshots) => {
     const adList = [];
-    console.log(snapshots, "here!");
+
     snapshots.forEach((doc) => {
-      console.log(doc, "?");
       const data = doc.data();
       data.uid = doc.id;
       data.createdAt = data.createdAt.seconds;
       data.date = data.date.seconds;
       adList.push(data);
     });
-    console.log(adList);
+
     return adList;
   });
 };
 export const fetchRejectedListingsByUserID = (isDriver, uid) => {
-  console.log({ isDriver, uid });
   const listingsRef = collection(
     db,
     `/app/listings/${isDriver ? "requests" : "offers"}`
@@ -176,16 +163,15 @@ export const fetchRejectedListingsByUserID = (isDriver, uid) => {
 
   return getDocs(listingsQuery).then((snapshots) => {
     const adList = [];
-    console.log(snapshots, "here!");
+
     snapshots.forEach((doc) => {
-      console.log(doc, "?");
       const data = doc.data();
       data.uid = doc.id;
       data.createdAt = data.createdAt.seconds;
       data.date = data.date.seconds;
       adList.push(data);
     });
-    console.log(adList);
+
     return adList;
   });
 };
