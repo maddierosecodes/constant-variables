@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { acceptInterest } from "../firebase/functions/write";
+import { acceptInterest, rejectInterest } from "../firebase/functions/write";
 function RideCard({ ride }) {
   const handleAccept = (person) => {
     const acceptWrite = () => {
@@ -8,6 +8,13 @@ function RideCard({ ride }) {
     };
 
     return acceptWrite;
+  };
+  const handleReject = (person) => {
+    const rejectWrite = () => {
+      rejectInterest(person, ride.uid);
+    };
+
+    return rejectWrite;
   };
   return (
     <article className="mw5 center bg-white br3 pa3 pa4-ns mv3 ba b--black-10">
@@ -28,7 +35,9 @@ function RideCard({ ride }) {
                   <button type={"default"} onClick={handleAccept(person, ride)}>
                     Accept
                   </button>
-                  <button type={"default"}>Reject</button>
+                  <button type={"default"} onClick={handleReject(person, ride)}>
+                    Reject
+                  </button>
                 </span>
               );
             })}

@@ -67,12 +67,6 @@ export const registerInterest = (rideID, uid, username, type) => {
 };
 
 export const acceptInterest = (user, rideID) => {
-  // write to the accepted users profile
-  // write to the ad - the ad id, the userObj
-  // remove from people interested and move to acceptedBy
-  //arrayRemove(userObj)
-  const pathPoint = user.type === "driver" ? "offers" : "requests";
-
   console.log({ user, rideID });
 
   const path = `/app/listings/${user.type}s`;
@@ -82,6 +76,23 @@ export const acceptInterest = (user, rideID) => {
   return updateDoc(rideRef, {
     interested: arrayRemove(user),
     accepted: arrayUnion(user),
+  })
+    .then((doc) => {
+      console.log(doc);
+    })
+    .catch(console.log);
+};
+
+export const rejectInterest = (user, rideID) => {
+  console.log({ user, rideID });
+
+  const path = `/app/listings/${user.type}s`;
+  console.log(path);
+  const rideRef = doc(db, path, rideID);
+
+  return updateDoc(rideRef, {
+    interested: arrayRemove(user),
+    rejected: arrayUnion(user),
   })
     .then((doc) => {
       console.log(doc);
