@@ -10,6 +10,8 @@ import SignUp from './components/SignUp';
 import AdditionalSignUp from './components/AdditionalSignUp';
 import Splash from './components/Splash';
 import PostRide from './components/PostRide';
+import DriverProfilePage from './components/DriverProfilePage';
+import PassengerProfilePage from './components/PassengerProfilePage';
 
 function App() {
   const [user, setUser] = useState({
@@ -35,6 +37,14 @@ function App() {
             element={<AdditionalSignUp />}
           ></Route>
           <Route path='/post' element={<PostRide />}></Route>
+          <Route
+            path='/profile/driver/:userID'
+            element={<DriverProfilePage />}
+          />
+          <Route
+            path='/profile/passenger/:userID'
+            element={<PassengerProfilePage />}
+          />
         </Routes>
       </main>
     </UserContext.Provider>
