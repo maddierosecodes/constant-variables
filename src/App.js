@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Route, Routes, Link } from "react-router-dom";
 import { UserContext } from "./contexts/User";
 import Login from "./components/Login";
@@ -21,6 +21,13 @@ function App() {
     isLoggedIn: false,
     email: "ira.martinez@gmail.com",
   });
+
+  useEffect(() => {
+    const userDataString = localStorage.getItem("userData");
+    const userData = JSON.parse(userDataString);
+    console.log(userData);
+    setUser(userData);
+  }, []);
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <main className="App">
@@ -41,10 +48,7 @@ function App() {
             path="/profile/:role/:userID"
             element={<OtherUserProfilePage />}
           />
-          <Route
-            path="/rides/:type/:rideID"
-            element={<SingleAdPage />}
-          />
+          <Route path="/rides/:type/:rideID" element={<SingleAdPage />} />
         </Routes>
       </main>
     </UserContext.Provider>

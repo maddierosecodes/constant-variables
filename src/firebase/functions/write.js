@@ -1,5 +1,13 @@
 import db from "../index";
-import { doc, collection, addDoc, setDoc } from "firebase/firestore";
+import {
+  doc,
+  collection,
+  addDoc,
+  setDoc,
+  updateDoc,
+  arrayUnion,
+  arrayRemove,
+} from "firebase/firestore";
 
 // Creates a new document from a document object, path and specfied unique id- for users
 export const writeUserData = (document, path, uid) => {
@@ -41,6 +49,56 @@ export const postAdvert = (isDriver, document = exampleListing) => {
   return addDoc(collection(db, path), document)
     .then((res) => {
       console.log(res, "success!");
+    })
+    .catch(console.log);
+};
+
+export const registerInterest = (rideID, uid, username, type) => {
+  console.log(rideID, uid, type);
+  const path = `/app/listings/${type}s`;
+
+  const rideRef = doc(db, path, rideID);
+
+  return updateDoc(rideRef, {
+    interestedUserObjs: arrayUnion({ uid, username, type }),
+    interestedUserIDs: arrayUnion(uid),
+  })
+    .then(console.log)
+    .catch(console.log);
+};
+
+export const acceptInterest = (user, rideID) => {
+  console.log({ user, rideID });
+
+  const path = `/app/listings/${user.type}s`;
+  console.log(path);
+  const rideRef = doc(db, path, rideID);
+
+  return updateDoc(rideRef, {
+    interestedUserObjs: arrayRemove(user),
+    interestedUserIDs: arrayRemove(user.uid),
+    accepted: user,
+  })
+    .then((doc) => {
+      console.log(doc);
+    })
+    .catch(console.log);
+};
+
+export const rejectInterest = (user, rideID) => {
+  console.log({ user, rideID });
+
+  const path = `/app/listings/${user.type}s`;
+  console.log(path);
+  const rideRef = doc(db, path, rideID);
+
+  return updateDoc(rideRef, {
+    interestedUserObjs: arrayRemove(user),
+    interestedUserIDs: arrayRemove(user.uid),
+    rejected: arrayUnion(user.uid),
+  })
+    .then((doc) => {
+      console.log(doc);
     })
     .catch(console.log);
 };
