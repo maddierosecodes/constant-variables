@@ -35,7 +35,6 @@ export default function Homepage() {
             return 0;
           }
         });
-        console.log(listings);
         setUserPosts(listings);
         setIsLoading(false);
       });
@@ -62,13 +61,13 @@ export default function Homepage() {
   return (
     <>
       <section id="profile-section">
-        <header>
-          <h2>Hello, {user.username}</h2>
-        </header>
+        <h2 className="title-text">Hello, {user.username}</h2>
+
         <img id="profile-img" src={professionalHeadshot} alt="user profile" />
         <p>Your role is {user.isDriver ? "Driver" : "Passenger"}</p>
-        <p>You are currently offering rides from {user.postcode}</p>
-        <p>You may post a ride or search for rides already posted.</p>
+        <p>
+          You are currently offering rides from <br></br> {user.postcode}
+        </p>
         <Link
           className="ride-link f4 fw6 db black link hover-purple underline-hover"
           to="/post"
@@ -79,7 +78,7 @@ export default function Homepage() {
           className="ride-link f4 fw6 db black link hover-purple underline-hover"
           to="/rides"
         >
-          View all rides
+          View all available rides
         </Link>
       </section>
       <section id="current-rides">
@@ -93,7 +92,9 @@ export default function Homepage() {
           <p>No rides currently</p>
         )}
         <h2>{user.isDriver ? "Requests" : "Offers"} I've Responded To</h2>
-        <h3>Accepted {user.isDriver ? "offers" : "requests"}</h3>
+        <h3 className="ride-subtitle">
+          Accepted {user.isDriver ? "offers" : "requests"}
+        </h3>
         {acceptedUserPosts ? (
           acceptedUserPosts.map((ride) => {
             return <RideCard ride={ride} key={ride.uid} />;
@@ -101,7 +102,9 @@ export default function Homepage() {
         ) : (
           <p>No rides currently accepted</p>
         )}
-        <h3>Pending {user.isDriver ? "offers" : "requests"}</h3>
+        <h3 className="ride-subtitle">
+          Pending {user.isDriver ? "offers" : "requests"}
+        </h3>
         {pendingUserPosts ? (
           pendingUserPosts.map((ride) => {
             return <RideCard ride={ride} key={ride.uid} />;
@@ -109,7 +112,9 @@ export default function Homepage() {
         ) : (
           <p>No rides currently pending</p>
         )}
-        <h3>Rejected {user.isDriver ? "offers" : "requests"}</h3>
+        <h3 className="ride-subtitle">
+          Rejected {user.isDriver ? "offers" : "requests"}
+        </h3>
         {rejectedUserPosts ? (
           rejectedUserPosts.map((ride) => {
             return <RideCard ride={ride} key={ride.uid} />;

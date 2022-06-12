@@ -1,3 +1,4 @@
+import { toOutcode } from "postcode";
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../contexts/User";
@@ -10,7 +11,6 @@ export default function ListOfRides() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("hi");
     const collectionName = user.isDriver ? "requests" : "offers";
     fetchListings(collectionName).then((listings) => {
       setListItems(listings);
@@ -19,34 +19,37 @@ export default function ListOfRides() {
 
   return (
     <div>
-      <h2>List of {user.isDriver ? "Requests" : "Offers"}</h2>
+      <h2 className="title-text">
+        List of {user.isDriver ? "Requests" : "Offers"}
+      </h2>
 
-      <ul>
-        {listItems.map((listing) => {
-          return (
-            <li className="ride-card" key={listing.uid}>
-                <p>{listing.body}</p>
-              <p>
-                Posted By:
-                <Link
-                  to={`/profile/${user.isDriver ? "passenger" : "driver"}/${
-                    listing.creatorId
-                  }`}
-                >
-                  {listing.createdBy}
-                </Link>
-              </p>
-              <p>
-                Journey Start: {listing.postcodeStart} Destination:{" "}
-                {listing.destination}
-              </p>
-              <p>
-                Posted: {new Date(listing.createdAt * 1000).toLocaleString()}
-              </p>
-              <p>
-                Date and time: {new Date(listing.date * 1000).toLocaleString()}
-              </p>
+      {listItems.map((listing) => {
+        return (
+          <section
+            className=" mw5 center bg-white br3 pa3 pa4-ns mv3 ba b--black-10"
+            key={listing.uid}
+          >
+            <h2 className="f4">{listing.body}</h2>
+            <hr className="mw3 bb bw1 b--black-10" />
+            <p>
+              Posted By:
+              <Link
+                to={`/profile/${user.isDriver ? "passenger" : "driver"}/${
+                  listing.creatorId
+                }`}
+              >
+                {listing.createdBy}
+              </Link>
+            </p>
+            <p>
+              Journey Start: {toOutcode(listing.postcodeStart)} Destination:{" "}
+              {listing.destination}
+            </p>
+            <p>Leaving at: {new Date(listing.date * 1000).toLocaleString()}</p>
+            <p>Posted: {new Date(listing.createdAt * 1000).toLocaleString()}</p>
+            <div className="button-container">
               <button
+                className="card-button"
                 onClick={() =>
                   navigate(
                     `/rides/${user.isDriver ? "request" : "offer"}/${
@@ -58,6 +61,7 @@ export default function ListOfRides() {
                 More Information
               </button>
               <button
+                className="card-button"
                 onClick={() =>
                   navigate(
                     `/profile/${user.isDriver ? "passenger" : "driver"}/${
@@ -68,10 +72,10 @@ export default function ListOfRides() {
               >
                 View User Profile
               </button>
-            </li>
-          );
-        })}
-      </ul>
+            </div>
+          </section>
+        );
+      })}
     </div>
   );
 }

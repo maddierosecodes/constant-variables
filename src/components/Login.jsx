@@ -15,7 +15,6 @@ export default function Login() {
     e.preventDefault();
     authenticateUser(email, password)
       .then(({ email, uid }) => {
-        console.log({ uid });
         // C9S2NwGZObPvJ1hmcYdQj2maPy32 -- passenger
         // DlvzNfVsaZXHeRV8dujxHWg3ehD3 -- driver
         return getProfile("C9S2NwGZObPvJ1hmcYdQj2maPy32");
