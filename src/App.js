@@ -8,6 +8,8 @@ import Homepage from './components/Homepage';
 import ListOfRides from './components/ListOfRides';
 import SignUp from './components/SignUp';
 import AdditionalSignUp from './components/AdditionalSignUp';
+import Splash from './components/Splash';
+import PostRide from './components/PostRide';
 
 function App() {
   const [user, setUser] = useState({
@@ -21,20 +23,6 @@ function App() {
     <UserContext.Provider value={{ user, setUser }}>
       <main className='App'>
         <Header />
-        <nav>
-          <Link
-            className='f4 fw6 db purple no-underline underline-hover'
-            to='/login'
-          >
-            {user.isLoggedIn ? '' : 'Log in here'}
-          </Link>
-          <Link
-            className='f4 fw6 db purple no-underline underline-hover'
-            to='/sign-up'
-          >
-            {user.isLoggedIn ? '' : 'Sign up here'}
-          </Link>
-        </nav>
 
         <Routes>
           <Route path='/' element={<Splash />}></Route>
@@ -46,6 +34,7 @@ function App() {
             path='/additional-questions'
             element={<AdditionalSignUp />}
           ></Route>
+          <Route path='/post' element={<PostRide />}></Route>
         </Routes>
       </main>
     </UserContext.Provider>
