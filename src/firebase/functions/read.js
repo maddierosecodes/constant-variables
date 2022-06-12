@@ -141,7 +141,7 @@ export const fetchAcceptedListingsByUserID = (isDriver, uid) => {
       db,
       `/app/listings/${isDriver ? "requests" : "offers"}`
     );
-    const listingsQuery = query(listingsRef, where("interestedUserIDs.uid", "==", uid));
+    const listingsQuery = query(listingsRef, where("interestedUserIDs", "array-contains", uid));
   
     return getDocs(listingsQuery).then((snapshots) => {
       const adList = [];

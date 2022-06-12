@@ -25,7 +25,7 @@ function RideCard({ ride }) {
         {ride.interestedUserIDs ? (
           <>
             <p>People Interested</p>
-            {ride.interestedUserIDs.map((person) => {
+            {ride.interestedUserObjs.map((person) => {
               return (
                 <span key={person.uid}>
                   <p>{person.username}</p>{" "}
