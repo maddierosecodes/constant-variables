@@ -64,3 +64,20 @@ export const registerInterest = (rideID, uid, username, type) => {
     .then(console.log)
     .catch(console.log);
 };
+
+// export const acceptInterest = (user, rideID) => {
+//   // write to the accepted users profile
+//   // write to the ad - the ad id, the userObj
+//   // remove from people interested and move to acceptedBy
+//   //arrayRemove(userObj)
+
+//   const path = `/app/listings/${user.type}s`;
+
+//   const rideRef = doc(db, path, rideID);
+
+//   return updateDoc(rideRef, {
+//     interested: arrayRemove(user),
+//   })
+//     .then(console.log)
+//     .catch(console.log);
+// };
