@@ -67,8 +67,9 @@ export default function Homepage() {
         </header>
         <img id="profile-img" src={professionalHeadshot} alt="user profile" />
         <p>Your role is {user.isDriver ? "Driver" : "Passenger"}</p>
-        <p>You are currently offering rides from {user.postcode}</p>
-        <p>You may post a ride or search for rides already posted.</p>
+        <p>
+          You are currently offering rides from <br></br> {user.postcode}
+        </p>
         <Link
           className="ride-link f4 fw6 db black link hover-purple underline-hover"
           to="/post"
@@ -79,7 +80,7 @@ export default function Homepage() {
           className="ride-link f4 fw6 db black link hover-purple underline-hover"
           to="/rides"
         >
-          View all rides
+          View all available rides
         </Link>
       </section>
       <section id="current-rides">

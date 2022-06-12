@@ -48,6 +48,7 @@ export default function ListOfRides() {
               Date and time: {new Date(listing.date * 1000).toLocaleString()}
             </p>
             <button
+              className="card-button"
               onClick={() =>
                 navigate(
                   `/rides/${user.isDriver ? "request" : "offer"}/${listing.uid}`
@@ -57,6 +58,7 @@ export default function ListOfRides() {
               More Information
             </button>
             <button
+              className="card-button"
               onClick={() =>
                 navigate(
                   `/profile/${user.isDriver ? "passenger" : "driver"}/${

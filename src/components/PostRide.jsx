@@ -150,12 +150,12 @@ function PostRide() {
   return (
     <div>
       <h2>Post</h2>
-      <form>
-        <label htmlFor="passengers">Passengers</label>
-        {validStates.passengers === "false" ? (
-          <p>Please enter a number between 0 and 7</p>
-        ) : null}
+      <form className="post-form">
+        <label className="label-text" htmlFor="passengers">
+          Passengers
+        </label>
         <input
+          className="input-area"
           value={advert.passengers.toString()}
           onChange={handleChange("passengers")}
           onBlur={validateInput("passengers")}
@@ -164,26 +164,32 @@ function PostRide() {
           id="passengers"
           required={true}
         ></input>
-
-        <label htmlFor="destination">Destination</label>
-        {validStates.destination === "false" ? (
-          <p>Please enter a valid postcodeStart</p>
+        {validStates.passengers === "false" ? (
+          <p className="err-text"> ▲ Please enter a number between 0 and 7</p>
         ) : null}
+
+        <label className="label-text" htmlFor="destination">
+          Destination
+        </label>
         <input
+          className="input-area"
           value={advert.destination}
           onChange={handleChange("destination")}
           onBlur={validateInput("destination")}
           type="text"
-          placeholder="What is the full postcodeStart?"
+          placeholder="What is the full postcode"
           id="destination"
           required={true}
         ></input>
-
-        <label htmlFor="date">Date and Time</label>
-        {validStates.date === "false" ? (
-          <p>Pick up time is in the past, please choose a time after now</p>
+        {validStates.destination === "false" ? (
+          <p className="err-text">▲ Please enter a valid postcode</p>
         ) : null}
+
+        <label className="label-text" htmlFor="date">
+          Date and Time
+        </label>
         <input
+          className="input-area"
           type="datetime-local"
           id="date"
           value={advert.date}
@@ -191,12 +197,17 @@ function PostRide() {
           onBlur={validateInput("date")}
           required={true}
         ></input>
-
-        <label htmlFor="email">Email</label>
-        {validStates.email === "false" ? (
-          <p>Please enter a valid email</p>
+        {validStates.date === "false" ? (
+          <p className="err-text">
+            ▲ Pick up time is in the past, please choose a time after now
+          </p>
         ) : null}
+
+        <label className="label-text" htmlFor="email">
+          Email
+        </label>
         <input
+          className="input-area"
           type="email"
           id="email"
           value={advert.email}
@@ -204,12 +215,15 @@ function PostRide() {
           required={true}
           onBlur={validateInput("email")}
         ></input>
-
-        <label htmlFor="postcodeStart">Starting Point Postcode</label>
-        {validStates.postcodeStart === "false" ? (
-          <p>Please enter a valid postcodeStart</p>
+        {validStates.email === "false" ? (
+          <p className="err-text"> ▲ Please enter a valid email</p>
         ) : null}
+
+        <label className="label-text" htmlFor="postcodeStart">
+          Starting Point Postcode
+        </label>
         <input
+          className="input-area"
           type="text"
           id="postcodeStart"
           value={advert.postcodeStart}
@@ -217,16 +231,26 @@ function PostRide() {
           onBlur={validateInput("postcodeStart")}
           required={true}
         ></input>
+        {validStates.postcodeStart === "false" ? (
+          <p className="err-text"> ▲ Please enter a valid postcode</p>
+        ) : null}
 
-        <label htmlFor="body">Description</label>
+        <label className="label-text" htmlFor="body">
+          Description
+        </label>
         <textarea
+          className="input-area"
           type="textarea"
-          rows={4}
+          maxLength={50}
+          rows={3}
           cols={20}
           id="body"
           value={advert.body}
           onChange={handleChange("body")}
           onBlur={validateInput("body")}
+          placeholder={
+            "Write a short message about your journey. 50 Characters Maximum"
+          }
           required={true}
         ></textarea>
 
