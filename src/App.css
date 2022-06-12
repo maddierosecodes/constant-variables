@@ -98,6 +98,13 @@ form button {
   margin: 0.5rem auto;
 }
 
+.ride-card {
+  padding: 1rem;
+  margin: 1rem;
+  list-style: none;
+  border: 2px black solid;
+}
+
 #profile-img {
   max-width: 200px;
   border-radius: 1rem;
