@@ -76,7 +76,7 @@ export const acceptInterest = (user, rideID) => {
 
   return updateDoc(rideRef, {
     interestedUserObjs: arrayRemove(user),
-    interestedUserIDs: arrayUnion(user.uid),
+    interestedUserIDs: arrayRemove(user.uid),
     accepted: user,
   })
     .then((doc) => {
@@ -94,7 +94,7 @@ export const rejectInterest = (user, rideID) => {
 
   return updateDoc(rideRef, {
     interestedUserObjs: arrayRemove(user),
-    interestedUserIDs: arrayUnion(user.uid),
+    interestedUserIDs: arrayRemove(user.uid),
     rejected: arrayUnion(user.uid),
   })
     .then((doc) => {

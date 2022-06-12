@@ -32,12 +32,22 @@ function RideCard({ ride }) {
                   <Link to={`/profile/${person.type}/${person.uid}`}>
                     View Profile
                   </Link>
-                  <button type={"default"} onClick={handleAccept(person, ride)}>
-                    Accept
-                  </button>
-                  <button type={"default"} onClick={handleReject(person, ride)}>
-                    Reject
-                  </button>
+                  {person.uid === ride.creatorId && (
+                    <>
+                      <button
+                        type={"default"}
+                        onClick={handleAccept(person, ride)}
+                      >
+                        Accept
+                      </button>
+                      <button
+                        type={"default"}
+                        onClick={handleReject(person, ride)}
+                      >
+                        Reject
+                      </button>
+                    </>
+                  )}
                 </span>
               );
             })}
