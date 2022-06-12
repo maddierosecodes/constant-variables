@@ -49,7 +49,6 @@ export const getOtherProfile = (uid, role) => {
 };
 
 export const fetchListings = (collectionName) => {
-  console.log("collectionName: ", collectionName);
   const listingsRef = collection(db, `/app/listings/${collectionName}`);
   const listingsQuery = query(
     listingsRef,
@@ -71,3 +70,17 @@ export const fetchListings = (collectionName) => {
     return adList;
   });
 };
+
+export const fetchSingleListing = (rideID, type) => {
+    console.log('rideID, type: ', rideID, type);
+    return getDoc(doc(db, `/app/listings/${type}s`, rideID))
+    .then((doc) => {
+      const data = doc.data();
+      console.log('data: ', data);
+
+      data.uid = doc.id;
+
+      return data;
+    })
+    .catch((err) => console.log(err));
+}
