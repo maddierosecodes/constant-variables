@@ -87,8 +87,12 @@ export const fetchSingleListing = (rideID, type) => {
     .catch((err) => console.log(err));
 };
 
-export const fetchListingsByUserID = (type, uid) => {
-  const listingsRef = collection(db, `/app/listings/${type}`);
+export const fetchListingsByUserID = (isDriver, uid) => {
+  console.log({ isDriver, uid });
+  const listingsRef = collection(
+    db,
+    `/app/listings/${isDriver ? "offers" : "requests"}`
+  );
   const listingsQuery = query(listingsRef, where("creatorId", "==", uid));
 
   return getDocs(listingsQuery).then((snapshots) => {
