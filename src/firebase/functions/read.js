@@ -86,3 +86,23 @@ export const fetchSingleListing = (rideID, type) => {
     })
     .catch((err) => console.log(err));
 };
+
+export const fetchListingsByUserID = (type, uid) => {
+  const listingsRef = collection(db, `/app/listings/${type}`);
+  const listingsQuery = query(listingsRef, where("creatorId", "==", uid));
+
+  return getDocs(listingsQuery).then((snapshots) => {
+    const adList = [];
+    console.log(snapshots);
+    snapshots.forEach((doc) => {
+      console.log(doc);
+      const data = doc.data();
+      data.uid = doc.id;
+      data.createdAt = data.createdAt.seconds;
+      data.date = data.date.seconds;
+      adList.push(data);
+    });
+    console.log(adList);
+    return adList;
+  });
+};
