@@ -65,7 +65,9 @@ export default function Homepage() {
         <img id='profile-img' src={professionalHeadshot} alt='user profile' />
         <p>Your role is {user.isDriver ? 'Driver' : 'Passenger'}</p>
         <p>
-          You are currently offering rides from <br></br> {user.postcode}
+          {user.isDriver
+            ? `You are currently offering rides from ${user.postcode}`
+            : `You are currently looking for rides from ${user.postcode}`}
         </p>
         <Link
           className='link f4 fw6 db black link hover-purple underline-hover'
