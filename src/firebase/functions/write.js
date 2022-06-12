@@ -75,16 +75,16 @@ export const acceptInterest = (user, rideID) => {
 
   console.log({ user, rideID });
 
-  const path = `/app/listings/${pathPoint}`;
-
+  const path = `/app/listings/${user.type}s`;
+  console.log(path);
   const rideRef = doc(db, path, rideID);
 
   return updateDoc(rideRef, {
     interested: arrayRemove(user),
+    accepted: arrayUnion(user),
   })
     .then((doc) => {
-      const data = doc.data();
-      console.log(data);
+      console.log(doc);
     })
     .catch(console.log);
 };

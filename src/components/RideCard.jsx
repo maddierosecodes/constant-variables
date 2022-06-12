@@ -20,7 +20,7 @@ function RideCard({ ride }) {
             <p>People Interested</p>
             {ride.interested.map((person) => {
               return (
-                <span>
+                <span key={person.uid}>
                   <p>{person.username}</p>{" "}
                   <Link to={`/profile/${person.type}/${person.uid}`}>
                     View Profile

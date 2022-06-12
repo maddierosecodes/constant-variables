@@ -57,7 +57,7 @@ export default function Homepage() {
         <h2>Current rides</h2>
         {userPosts ? (
           userPosts.map((ride) => {
-            return <RideCard ride={ride} />;
+            return <RideCard ride={ride} key={ride.uid}/>;
           })
         ) : (
           <p>No rides currently</p>

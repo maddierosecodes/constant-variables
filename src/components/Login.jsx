@@ -18,7 +18,7 @@ export default function Login() {
         console.log({ uid });
         // C9S2NwGZObPvJ1hmcYdQj2maPy32 -- passenger
         // DlvzNfVsaZXHeRV8dujxHWg3ehD3 -- driver
-        return getProfile("C9S2NwGZObPvJ1hmcYdQj2maPy32");
+        return getProfile("DlvzNfVsaZXHeRV8dujxHWg3ehD3");
       })
       .then((user) => {
         setUser(user);
