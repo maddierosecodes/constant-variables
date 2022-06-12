@@ -1,14 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import topLogo from "../assets/images/SpareSeatsHorizontal.png";
 
 export default function Header() {
   return (
     <header id="header">
-      <h1>Spare Seats</h1>
-      <nav>
-        <Link to="/home">Home</Link>
-        <Link to="/rides">Rides</Link>
-        <Link to="/post">Post</Link>
+      <img src={topLogo} alt="spare seats logo" className="headerLogo"></img>
+      <nav className="navBar">
+        <Link to="/home" className="navLink">
+          <h2>Home</h2>
+        </Link>
+        <Link to="/rides" className="navLink">
+          <h2>Rides</h2>
+        </Link>
+        <Link to="/post" className="navLink">
+          <h2>Post</h2>
+        </Link>
       </nav>
     </header>
   );

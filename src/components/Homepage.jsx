@@ -9,6 +9,7 @@ import {
   fetchRejectedListingsByUserID,
 } from "../firebase/functions/read";
 import RideCard from "./RideCard";
+import professionalHeadshot from "../assets/images/professionalHeadshot.jpeg";
 
 export default function Homepage() {
   const { user } = useContext(UserContext);
@@ -64,7 +65,7 @@ export default function Homepage() {
         <header>
           <h2>Hello, {user.username}</h2>
         </header>
-        <img id="profile-img" src={profilePlaceholder} alt="user profile" />
+        <img id="profile-img" src={professionalHeadshot} alt="user profile" />
         <p>Your role is {user.isDriver ? "Driver" : "Passenger"}</p>
         <p>You are currently offering rides from {user.postcode}</p>
         <p>You may post a ride or search for rides already posted.</p>
