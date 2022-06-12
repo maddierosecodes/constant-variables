@@ -112,49 +112,78 @@ export const fetchListingsByUserID = (isDriver, uid) => {
 };
 
 export const fetchAcceptedListingsByUserID = (isDriver, uid) => {
-    console.log({ isDriver, uid });
-    const listingsRef = collection(
-      db,
-      `/app/listings/${isDriver ? "requests" : "offers"}`
-    );
-    const listingsQuery = query(listingsRef, where("accepted.uid", "==", uid));
-  
-    return getDocs(listingsQuery).then((snapshots) => {
-      const adList = [];
-      console.log(snapshots, 'here!');
-      snapshots.forEach((doc) => {
-        console.log(doc, '?');
-        const data = doc.data();
-        data.uid = doc.id;
-        data.createdAt = data.createdAt.seconds;
-        data.date = data.date.seconds;
-        adList.push(data);
-      });
-      console.log(adList);
-      return adList;
-    });
-  };
+  console.log({ isDriver, uid });
+  const listingsRef = collection(
+    db,
+    `/app/listings/${isDriver ? "requests" : "offers"}`
+  );
+  const listingsQuery = query(listingsRef, where("accepted.uid", "==", uid));
 
-  export const fetchPendingListingsByUserID = (isDriver, uid) => {
-    console.log({ isDriver, uid });
-    const listingsRef = collection(
-      db,
-      `/app/listings/${isDriver ? "requests" : "offers"}`
-    );
-    const listingsQuery = query(listingsRef, where("interestedUserIDs", "array-contains", uid));
-  
-    return getDocs(listingsQuery).then((snapshots) => {
-      const adList = [];
-      console.log(snapshots, 'here!');
-      snapshots.forEach((doc) => {
-        console.log(doc, '?');
-        const data = doc.data();
-        data.uid = doc.id;
-        data.createdAt = data.createdAt.seconds;
-        data.date = data.date.seconds;
-        adList.push(data);
-      });
-      console.log(adList);
-      return adList;
+  return getDocs(listingsQuery).then((snapshots) => {
+    const adList = [];
+    console.log(snapshots, "here!");
+    snapshots.forEach((doc) => {
+      console.log(doc, "?");
+      const data = doc.data();
+      data.uid = doc.id;
+      data.createdAt = data.createdAt.seconds;
+      data.date = data.date.seconds;
+      adList.push(data);
     });
-  };
+    console.log(adList);
+    return adList;
+  });
+};
+
+export const fetchPendingListingsByUserID = (isDriver, uid) => {
+  console.log({ isDriver, uid });
+  const listingsRef = collection(
+    db,
+    `/app/listings/${isDriver ? "requests" : "offers"}`
+  );
+  const listingsQuery = query(
+    listingsRef,
+    where("interestedUserIDs", "array-contains", uid)
+  );
+
+  return getDocs(listingsQuery).then((snapshots) => {
+    const adList = [];
+    console.log(snapshots, "here!");
+    snapshots.forEach((doc) => {
+      console.log(doc, "?");
+      const data = doc.data();
+      data.uid = doc.id;
+      data.createdAt = data.createdAt.seconds;
+      data.date = data.date.seconds;
+      adList.push(data);
+    });
+    console.log(adList);
+    return adList;
+  });
+};
+export const fetchRejectedListingsByUserID = (isDriver, uid) => {
+  console.log({ isDriver, uid });
+  const listingsRef = collection(
+    db,
+    `/app/listings/${isDriver ? "requests" : "offers"}`
+  );
+  const listingsQuery = query(
+    listingsRef,
+    where("rejected", "array-contains", uid)
+  );
+
+  return getDocs(listingsQuery).then((snapshots) => {
+    const adList = [];
+    console.log(snapshots, "here!");
+    snapshots.forEach((doc) => {
+      console.log(doc, "?");
+      const data = doc.data();
+      data.uid = doc.id;
+      data.createdAt = data.createdAt.seconds;
+      data.date = data.date.seconds;
+      adList.push(data);
+    });
+    console.log(adList);
+    return adList;
+  });
+};

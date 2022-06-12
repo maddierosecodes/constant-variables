@@ -6,6 +6,7 @@ import {
   fetchAcceptedListingsByUserID,
   fetchListingsByUserID,
   fetchPendingListingsByUserID,
+  fetchRejectedListingsByUserID,
 } from "../firebase/functions/read";
 import RideCard from "./RideCard";
 
@@ -15,6 +16,7 @@ export default function Homepage() {
   const [userPosts, setUserPosts] = useState([]);
   const [acceptedUserPosts, setAcceptedUserPosts] = useState([]);
   const [pendingUserPosts, setPendingUserPosts] = useState([]);
+  const [rejectedUserPosts, setRejectedUserPosts] = useState([]);
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -30,9 +32,13 @@ export default function Homepage() {
           setIsLoading(false);
         }
       );
-      fetchPendingListingsByUserID(user.isDriver, user.uid).then(
+      fetchPendingListingsByUserID(user.isDriver, user.uid).then((listings) => {
+        setPendingUserPosts(listings);
+        setIsLoading(false);
+      });
+      fetchRejectedListingsByUserID(user.isDriver, user.uid).then(
         (listings) => {
-          setPendingUserPosts(listings);
+          setRejectedUserPosts(listings);
           setIsLoading(false);
         }
       );
@@ -99,6 +105,13 @@ export default function Homepage() {
           <p>No rides currently pending</p>
         )}
         <h3>Rejected {user.isDriver ? "offers" : "requests"}</h3>
+        {rejectedUserPosts ? (
+          rejectedUserPosts.map((ride) => {
+            return <RideCard ride={ride} key={ride.uid} />;
+          })
+        ) : (
+          <p>No rides currently Rejected</p>
+        )}
       </section>
     </>
   );
