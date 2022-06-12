@@ -8,7 +8,7 @@ export default function Splash() {
     <>
       <section>
         <h2>Welcome to Spare Seats!</h2>
-        <p class="info">
+        <p className="info">
           We aim to connect refugees, asylum seekers and other displaced people
           wirh volunteer drivers to help make transportation easy. Got an
           important appointment? Need to pick up work or residency documents?

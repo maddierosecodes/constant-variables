@@ -23,10 +23,12 @@ function App() {
   });
 
   useEffect(() => {
-    const userDataString = localStorage.getItem("userData");
-    const userData = JSON.parse(userDataString);
-    setUser(userData);
-  }, []);
+    if (user.isLoggedIn) {
+      const userDataString = localStorage.getItem("userData");
+      const userData = JSON.parse(userDataString);
+      setUser(userData);
+    }
+  }, [user]);
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <main className="App">
