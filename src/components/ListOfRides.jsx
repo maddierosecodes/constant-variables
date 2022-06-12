@@ -1,36 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "../contexts/User";
 import { fetchListings } from "../firebase/functions/read";
 
 export default function ListOfRides() {
   const [listItems, setListItems] = useState([]);
-  const [isDriver, setIsDriver] = useState(true); // for testing, probably not needed once userContext set up.
+  const { user } = useContext(UserContext);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     console.log("hi");
-    const collectionName = isDriver ? "requests" : "offers";
+    const collectionName = user.isDriver ? "requests" : "offers";
     fetchListings(collectionName).then((listings) => {
       setListItems(listings);
     });
-  }, [isDriver]); // for testing, remove dependency once userContext set up.
+  }, []);
 
   return (
     <div>
-      <h2>List of {isDriver ? "Requests" : "Offers"}</h2>
-      <button onClick={() => setIsDriver(!isDriver)}>
-        Driver to {`${!isDriver}`}
-      </button>
-      {/* <--- for testing, remove once userContext set up */}
+      <h2>List of {user.isDriver ? "Requests" : "Offers"}</h2>
+
       <ul>
         {listItems.map((listing) => {
           return (
             <li className="ride-card" key={listing.uid}>
+                <p>{listing.body}</p>
               <p>
                 Posted By:
                 <Link
-                  to={`/profile/${isDriver ? "passenger" : "driver"}/${
+                  to={`/profile/${user.isDriver ? "passenger" : "driver"}/${
                     listing.creatorId
                   }`}
                 >
@@ -47,19 +46,21 @@ export default function ListOfRides() {
               <p>
                 Date and time: {new Date(listing.date * 1000).toLocaleString()}
               </p>
-              <button  onClick={() =>
+              <button
+                onClick={() =>
                   navigate(
-                    `/rides/${isDriver ? "request" : "offer"}/${
+                    `/rides/${user.isDriver ? "request" : "offer"}/${
                       listing.uid
                     }`
                   )
-                }>
+                }
+              >
                 More Information
               </button>
               <button
                 onClick={() =>
                   navigate(
-                    `/profile/${isDriver ? "passenger" : "driver"}/${
+                    `/profile/${user.isDriver ? "passenger" : "driver"}/${
                       listing.creatorId
                     }`
                   )

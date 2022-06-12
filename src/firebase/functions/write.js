@@ -60,7 +60,8 @@ export const registerInterest = (rideID, uid, username, type) => {
   const rideRef = doc(db, path, rideID);
 
   return updateDoc(rideRef, {
-    interested: arrayUnion({ uid, username, type }),
+    interestedUserObjs: arrayUnion({ uid, username, type }),
+    interestedUserIDs: arrayUnion(uid),
   })
     .then(console.log)
     .catch(console.log);
@@ -74,8 +75,9 @@ export const acceptInterest = (user, rideID) => {
   const rideRef = doc(db, path, rideID);
 
   return updateDoc(rideRef, {
-    interested: arrayRemove(user),
-    accepted: arrayUnion(user),
+    interestedUserObjs: arrayRemove(user),
+    interestedUserIDs: arrayUnion(user.uid),
+    accepted: user,
   })
     .then((doc) => {
       console.log(doc);
@@ -91,8 +93,9 @@ export const rejectInterest = (user, rideID) => {
   const rideRef = doc(db, path, rideID);
 
   return updateDoc(rideRef, {
-    interested: arrayRemove(user),
-    rejected: arrayUnion(user),
+    interestedUserObjs: arrayRemove(user),
+    interestedUserIDs: arrayUnion(user.uid),
+    rejected: arrayUnion(user.uid),
   })
     .then((doc) => {
       console.log(doc);

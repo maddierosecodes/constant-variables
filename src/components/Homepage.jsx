@@ -2,13 +2,17 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../contexts/User";
 import { Link } from "react-router-dom";
 import profilePlaceholder from "../assets/images/profile-placeholder.png";
-import { fetchListingsByUserID } from "../firebase/functions/read";
+import {
+  fetchAcceptedListingsByUserID,
+  fetchListingsByUserID,
+} from "../firebase/functions/read";
 import RideCard from "./RideCard";
 
 export default function Homepage() {
   const { user } = useContext(UserContext);
 
   const [userPosts, setUserPosts] = useState([]);
+  const [acceptedUserPosts, setAcceptedUserPosts] = useState([]);
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -18,6 +22,12 @@ export default function Homepage() {
         setUserPosts(listings);
         setIsLoading(false);
       });
+      fetchAcceptedListingsByUserID(user.isDriver, user.uid).then(
+        (listings) => {
+          setAcceptedUserPosts(listings);
+          setIsLoading(false);
+        }
+      );
     }
   }, [user]);
 
@@ -54,7 +64,8 @@ export default function Homepage() {
         </Link>
       </section>
       <section id="current-rides">
-        <h2>My Posted Listings</h2> {/* our posts */}
+        <h2>My Posted {user.isDriver ? "Offers" : "requests"}</h2>{" "}
+        {/* our posts */}
         {userPosts ? (
           userPosts.map((ride) => {
             return <RideCard ride={ride} key={ride.uid} />;
@@ -62,11 +73,17 @@ export default function Homepage() {
         ) : (
           <p>No rides currently</p>
         )}
-        <h2>My {user.isDriver === "driver" ? "offers" : "requests"}</h2>
-        <h3>Accepted {user.isDriver === "driver" ? "offers" : "requests"}</h3>
-          
-        <h3>Pending {user.isDriver === "driver" ? "offers" : "requests"}</h3>
-        <h3>Rejected {user.isDriver === "driver" ? "offers" : "requests"}</h3>
+        <h2>{user.isDriver ? "Requests" : "Offers"} I've Responded To</h2>
+        <h3>Accepted {user.isDriver ? "offers" : "requests"}</h3>
+        {acceptedUserPosts ? (
+          acceptedUserPosts.map((ride) => {
+            return <RideCard ride={ride} key={ride.uid} />;
+          })
+        ) : (
+          <p>No rides currently accepted</p>
+        )}
+        <h3>Pending {user.isDriver ? "offers" : "requests"}</h3>
+        <h3>Rejected {user.isDriver ? "offers" : "requests"}</h3>
       </section>
     </>
   );
