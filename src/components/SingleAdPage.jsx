@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { fetchSingleListing } from "../firebase/functions/read";
-import { toOutcode } from "postcode";
-import { registerInterest } from "../firebase/functions/write";
-import { UserContext } from "../contexts/User";
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { fetchSingleListing } from '../firebase/functions/read';
+import { toOutcode } from 'postcode';
+import { registerInterest } from '../firebase/functions/write';
+import { UserContext } from '../contexts/User';
 
 export default function SingleAdPage() {
   const { type, rideID } = useParams();
@@ -40,10 +40,10 @@ export default function SingleAdPage() {
     uid,
   } = listingInfo;
   return (
-    <div>
+    <article className='ride-card  mw5 center bg-white br3 pa3 pa4-ns mv3 ba b--black-10'>
       <Link
-        className="f4 fw6 db purple no-underline underline-hover"
-        to="/rides"
+        className='f4 fw6 db purple no-underline underline-hover'
+        to='/rides'
       >
         Back to all rides
       </Link>
@@ -53,12 +53,14 @@ export default function SingleAdPage() {
       <p>Posted: {new Date(posted * 1000).toLocaleString()}</p>
       <p>Date and time: {new Date(date * 1000).toLocaleString()}</p>
       <p>
-        Start: {postcodeStart ? toOutcode(postcodeStart) : null} Destination:{" "}
+        Start: {postcodeStart ? toOutcode(postcodeStart) : null} Destination:{' '}
         {destination}
       </p>
       <p>Contact: {email}</p>
       {statusAccepted && <p>Listing fulfilled!</p>}
-      <button onClick={handleInterest}>Register Interest</button>
-    </div>
+      <button className='card-button' onClick={handleInterest}>
+        Register Interest
+      </button>
+    </article>
   );
 }

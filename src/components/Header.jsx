@@ -23,19 +23,3 @@ export default function Header() {
     </header>
   );
 }
-
-// <Route path="/" element={<Splash />}></Route>
-//           <Route path="/login" element={<Login />} />
-//           <Route path="/sign-up" element={<SignUp />} />
-//           <Route path="/home" element={<Homepage />} />
-//           <Route path="/rides" element={<ListOfRides />} />
-//           <Route
-//             path="/additional-questions"
-//             element={<AdditionalSignUp />}
-//           ></Route>
-//           <Route path="/post" element={<PostRide />}></Route>
-//           <Route
-//             path="/profile/:role/:userID"
-//             element={<OtherUserProfilePage />}
-//           />
-//           <Route path="/rides/:type/:rideID" element={<SingleAdPage />} />

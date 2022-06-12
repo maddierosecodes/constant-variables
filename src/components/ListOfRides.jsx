@@ -1,8 +1,8 @@
-import { toOutcode } from "postcode";
-import React, { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { UserContext } from "../contexts/User";
-import { fetchListings } from "../firebase/functions/read";
+import { toOutcode } from 'postcode';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { UserContext } from '../contexts/User';
+import { fetchListings } from '../firebase/functions/read';
 
 export default function ListOfRides() {
   const [listItems, setListItems] = useState([]);
@@ -11,7 +11,7 @@ export default function ListOfRides() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const collectionName = user.isDriver ? "requests" : "offers";
+    const collectionName = user.isDriver ? 'requests' : 'offers';
     fetchListings(collectionName).then((listings) => {
       setListItems(listings);
     });
@@ -19,22 +19,23 @@ export default function ListOfRides() {
 
   return (
     <div>
-      <h2 className="title-text">
-        List of {user.isDriver ? "Requests" : "Offers"}
+      <h2 className='title-text'>
+        List of {user.isDriver ? 'Requests' : 'Offers'}
       </h2>
 
       {listItems.map((listing) => {
         return (
-          <section
-            className=" mw5 center bg-white br3 pa3 pa4-ns mv3 ba b--black-10"
+          <article
+            className='ride-card mw5 center bg-white br3 pa3 pa4-ns mv3 ba b--black-10'
             key={listing.uid}
           >
-            <h2 className="f4">{listing.body}</h2>
-            <hr className="mw3 bb bw1 b--black-10" />
+            <h2 className='f4'>{listing.body}</h2>
+            <hr className='mw3 bb bw1 b--black-10' />
             <p>
               Posted By:
               <Link
-                to={`/profile/${user.isDriver ? "passenger" : "driver"}/${
+                className='f4 fw6 db purple no-underline underline-hover'
+                to={`/profile/${user.isDriver ? 'passenger' : 'driver'}/${
                   listing.creatorId
                 }`}
               >
@@ -42,17 +43,17 @@ export default function ListOfRides() {
               </Link>
             </p>
             <p>
-              Journey Start: {toOutcode(listing.postcodeStart)} Destination:{" "}
+              Journey Start: {toOutcode(listing.postcodeStart)} Destination:{' '}
               {listing.destination}
             </p>
             <p>Leaving at: {new Date(listing.date * 1000).toLocaleString()}</p>
             <p>Posted: {new Date(listing.createdAt * 1000).toLocaleString()}</p>
-            <div className="button-container">
+            <div className='button-container'>
               <button
-                className="card-button"
+                className='card-button'
                 onClick={() =>
                   navigate(
-                    `/rides/${user.isDriver ? "request" : "offer"}/${
+                    `/rides/${user.isDriver ? 'request' : 'offer'}/${
                       listing.uid
                     }`
                   )
@@ -61,10 +62,10 @@ export default function ListOfRides() {
                 More Information
               </button>
               <button
-                className="card-button"
+                className='card-button'
                 onClick={() =>
                   navigate(
-                    `/profile/${user.isDriver ? "passenger" : "driver"}/${
+                    `/profile/${user.isDriver ? 'passenger' : 'driver'}/${
                       listing.creatorId
                     }`
                   )
@@ -73,7 +74,7 @@ export default function ListOfRides() {
                 View User Profile
               </button>
             </div>
-          </section>
+          </article>
         );
       })}
     </div>
@@ -85,32 +86,32 @@ const offers = [
   {
     id: 1,
     passengers: 2,
-    body: "ff",
-    createdBy: "dd",
+    body: 'ff',
+    createdBy: 'dd',
     date: Date.now(),
-    destination: "d77 8vv",
-    postcodeStart: "d72",
-    title: "hshshss",
+    destination: 'd77 8vv',
+    postcodeStart: 'd72',
+    title: 'hshshss',
   },
   {
     id: 2,
     passengers: 5,
-    body: "ffsdf",
-    createdBy: "sfdd",
+    body: 'ffsdf',
+    createdBy: 'sfdd',
     date: Date.now(),
-    destination: "g15 7gd",
-    postcodeStart: "h55",
-    title: "hshshsheheshss",
+    destination: 'g15 7gd',
+    postcodeStart: 'h55',
+    title: 'hshshsheheshss',
   },
   {
     id: 3,
     passengers: 3,
-    body: "ffsgheh",
-    createdBy: "heehehdd",
+    body: 'ffsgheh',
+    createdBy: 'heehehdd',
     date: Date.now(),
-    destination: "dd2 6dd",
-    postcodeStart: "d22",
-    title: "hshshsghsthsehs",
+    destination: 'dd2 6dd',
+    postcodeStart: 'd22',
+    title: 'hshshsghsthsehs',
   },
 ];
 
@@ -118,31 +119,31 @@ const requests = [
   {
     id: 1,
     passengers: 6,
-    body: "fegasf",
-    createdBy: "sfgsdd",
+    body: 'fegasf',
+    createdBy: 'sfgsdd',
     date: Date.now(),
-    destination: "rt4 4gf",
-    postcodeStart: "rt3",
-    title: "hshagargagreshss",
+    destination: 'rt4 4gf',
+    postcodeStart: 'rt3',
+    title: 'hshagargagreshss',
   },
   {
     id: 2,
     passengers: 5,
-    body: "ffagagasdf",
-    createdBy: "agagasfdd",
+    body: 'ffagagasdf',
+    createdBy: 'agagasfdd',
     date: Date.now(),
-    destination: "fe3 3re",
-    postcodeStart: "fg4",
-    title: "hagaaggagshshsheheshss",
+    destination: 'fe3 3re',
+    postcodeStart: 'fg4',
+    title: 'hagaaggagshshsheheshss',
   },
   {
     id: 3,
     passengers: 3,
-    body: "ffsgnhdnfdgheh",
-    createdBy: "hgfdnfgdfneehehdd",
+    body: 'ffsgnhdnfdgheh',
+    createdBy: 'hgfdnfgdfneehehdd',
     date: Date.now(),
-    destination: "ds4 3fd",
-    postcodeStart: "fd3",
-    title: "hshshsghsthsehdngfdngfdnfs",
+    destination: 'ds4 3fd',
+    postcodeStart: 'fd3',
+    title: 'hshshsghsthsehdngfdngfdnfs',
   },
 ];

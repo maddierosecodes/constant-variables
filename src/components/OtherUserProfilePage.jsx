@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import profilePlaceholder from "../assets/images/profile-placeholder.png";
-import { getOtherProfile } from "../firebase/functions/read";
-import { toOutcode } from "postcode";
+import React, { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import profilePlaceholder from '../assets/images/profile-placeholder.png';
+import { getOtherProfile } from '../firebase/functions/read';
+import { toOutcode } from 'postcode';
 
 export default function OtherUserProfilePage() {
   const { role, userID } = useParams();
@@ -19,53 +19,55 @@ export default function OtherUserProfilePage() {
   if (isLoading) return <p>loading...</p>;
 
   return (
-    <div>
-      {" "}
+    <section id='profile-section'>
+      {' '}
       <Link
-        className="f4 fw6 db purple no-underline underline-hover"
-        to="/rides"
+        className='f4 fw6 db purple no-underline underline-hover'
+        to='/rides'
       >
         Back to all rides
       </Link>
       <h2>{profileInfo.username}'s Profile</h2>
-      <img id="profile-img" src={profilePlaceholder} alt="user profile" />
+      <img id='profile-img' src={profilePlaceholder} alt='user profile' />
       <h3>{profileInfo.firstName}</h3>
       <p>
-        Rating:{" "}
-        {profileInfo.rating ? `${profileInfo.rating}/5` : "not yet rated"}
+        Rating:{' '}
+        {profileInfo.rating ? `${profileInfo.rating}/5` : 'not yet rated'}
       </p>
       <p>{profileInfo.profile}</p>
       <p>
-        {profileInfo.firstName}'s role is{" "}
-        {profileInfo.isDriver ? "driver" : "passenger"}
+        {profileInfo.firstName}'s role is{' '}
+        {profileInfo.isDriver ? 'driver' : 'passenger'}
       </p>
       <p>
-        {profileInfo.firstName} is currently{" "}
-        {profileInfo.isDriver ? "offering" : "requesting"} rides from{" "}
+        {profileInfo.firstName} is currently{' '}
+        {profileInfo.isDriver ? 'offering' : 'requesting'} rides from{' '}
         {toOutcode(profileInfo.postcode)}
       </p>
       <p>Gender: {profileInfo.gender}</p>
       <p>Age Group: {profileInfo.ageGroup}</p>
-      <p>Language(s): {profileInfo.languages.map((x) => x + " ")}</p>
+      <p>Language(s): {profileInfo.languages.map((x) => x + ' ')}</p>
       {profileInfo.isDriver && (
-        <ul>
-          Background Checks:{" "}
-          <li>
-            {profileInfo.backgroundCheck.dbs
-              ? "DBS checked ✅"
-              : "DBS not checked ❌"}
-          </li>{" "}
-          <li>
-            {" "}
-            {profileInfo.backgroundCheck.licensed
-              ? "License checked ✅"
-              : "License not checked ❌"}
-          </li>
-        </ul>
+        <>
+          <h3>Background checks:</h3>
+          <ul className='list pa2 ml0 center mw5 ba b--purple br3 ma2'>
+            <li>
+              {profileInfo.backgroundCheck.dbs
+                ? 'DBS checked ✅'
+                : 'DBS not checked ❌'}
+            </li>{' '}
+            <li>
+              {' '}
+              {profileInfo.backgroundCheck.licensed
+                ? 'License checked ✅'
+                : 'License not checked ❌'}
+            </li>
+          </ul>
+        </>
       )}
       <p>Contact: {profileInfo.email}</p>
       {/* driver reviews component */}
-    </div>
+    </section>
   );
 }
 

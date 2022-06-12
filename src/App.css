@@ -50,10 +50,6 @@ a {
   text-align: center;
 }
 
-section {
-  /* padding: 0.5rem; */
-}
-
 button {
   cursor: pointer;
 }
@@ -66,11 +62,6 @@ form {
   display: flex;
   flex-direction: column;
   padding: 1rem;
-}
-
-form button {
-  padding: 1rem;
-  margin: 1rem;
 }
 
 #header {
@@ -104,7 +95,7 @@ form button {
   margin: 0.4rem;
 }
 
-.ride-link {
+.link {
   border: dashed 1px var(--lowlight);
   padding: 0.5rem;
   width: 50%;
@@ -112,11 +103,13 @@ form button {
   background-color: var(--highlight);
 }
 
-.ride-card {
-  padding: 1rem;
-  margin: 1rem;
-  list-style: none;
-  border: 2px black solid;
+.link:hover {
+  color: #2a124c;
+}
+
+.ride-card p {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 #profile-img {
@@ -145,6 +138,10 @@ form button {
 .navBar {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+}
+
+#login-btn {
+  margin: 0.5rem auto;
 }
 
 .listing-item {
@@ -191,7 +188,9 @@ form button {
   color: var(--textColor);
 }
 
-.post-button {
+.button {
+  padding: 1rem;
+  margin: 1rem;
   border-radius: 10px;
   background-color: var(--pinkHighlight);
   font-size: 2.2rem;
