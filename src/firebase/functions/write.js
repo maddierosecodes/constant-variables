@@ -6,6 +6,7 @@ import {
   setDoc,
   updateDoc,
   arrayUnion,
+  arrayRemove,
 } from "firebase/firestore";
 
 // Creates a new document from a document object, path and specfied unique id- for users
@@ -65,19 +66,25 @@ export const registerInterest = (rideID, uid, username, type) => {
     .catch(console.log);
 };
 
-// export const acceptInterest = (user, rideID) => {
-//   // write to the accepted users profile
-//   // write to the ad - the ad id, the userObj
-//   // remove from people interested and move to acceptedBy
-//   //arrayRemove(userObj)
+export const acceptInterest = (user, rideID) => {
+  // write to the accepted users profile
+  // write to the ad - the ad id, the userObj
+  // remove from people interested and move to acceptedBy
+  //arrayRemove(userObj)
+  const pathPoint = user.type === "driver" ? "offers" : "requests";
 
-//   const path = `/app/listings/${user.type}s`;
+  console.log({ user, rideID });
 
-//   const rideRef = doc(db, path, rideID);
+  const path = `/app/listings/${pathPoint}`;
 
-//   return updateDoc(rideRef, {
-//     interested: arrayRemove(user),
-//   })
-//     .then(console.log)
-//     .catch(console.log);
-// };
+  const rideRef = doc(db, path, rideID);
+
+  return updateDoc(rideRef, {
+    interested: arrayRemove(user),
+  })
+    .then((doc) => {
+      const data = doc.data();
+      console.log(data);
+    })
+    .catch(console.log);
+};

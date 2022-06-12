@@ -1,6 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { acceptInterest } from "../firebase/functions/write";
 function RideCard({ ride }) {
+  const handleAccept = (person) => {
+    const acceptWrite = () => {
+      acceptInterest(person, ride.uid);
+    };
+
+    return acceptWrite;
+  };
   return (
     <article className="mw5 center bg-white br3 pa3 pa4-ns mv3 ba b--black-10">
       <div className="tc">
@@ -17,7 +25,9 @@ function RideCard({ ride }) {
                   <Link to={`/profile/${person.type}/${person.uid}`}>
                     View Profile
                   </Link>
-                  <button type={"default"}>Accept</button>
+                  <button type={"default"} onClick={handleAccept(person, ride)}>
+                    Accept
+                  </button>
                   <button type={"default"}>Reject</button>
                 </span>
               );
