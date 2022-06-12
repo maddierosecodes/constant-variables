@@ -9,13 +9,19 @@ export default function Homepage() {
   const { user } = useContext(UserContext);
 
   const [userPosts, setUserPosts] = useState([]);
+
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
-    if (user) {
+    if (user.uid) {
       fetchListingsByUserID(user.isDriver, user.uid).then((listings) => {
         setUserPosts(listings);
+        setIsLoading(false);
       });
     }
-  }, []);
+  }, [user]);
+
+  if (isLoading) return <p>Loading</p>;
   return (
     <>
       <section id="profile-section">

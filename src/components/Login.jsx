@@ -22,6 +22,7 @@ export default function Login() {
       })
       .then((user) => {
         setUser(user);
+        localStorage.setItem("userData", JSON.stringify(user));
         navigate("/home", { replace: true });
       });
   };
