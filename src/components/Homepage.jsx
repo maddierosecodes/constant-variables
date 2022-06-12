@@ -37,7 +37,7 @@ export default function Homepage() {
           <h2>Hello, {user.username}</h2>
         </header>
         <img id="profile-img" src={profilePlaceholder} alt="user profile" />
-        <p>Your role is {user.role}</p>
+        <p>Your role is {user.isDriver ? "Driver" : "Passenger"}</p>
         <p>You are currently offering rides from {user.postcode}</p>
         <p>You may post a ride or search for rides already posted.</p>
         <Link
@@ -54,14 +54,19 @@ export default function Homepage() {
         </Link>
       </section>
       <section id="current-rides">
-        <h2>Current rides</h2>
+        <h2>My Posted Listings</h2> {/* our posts */}
         {userPosts ? (
           userPosts.map((ride) => {
-            return <RideCard ride={ride} key={ride.uid}/>;
+            return <RideCard ride={ride} key={ride.uid} />;
           })
         ) : (
           <p>No rides currently</p>
         )}
+        <h2>My {user.isDriver === "driver" ? "offers" : "requests"}</h2>
+        <h3>Accepted {user.isDriver === "driver" ? "offers" : "requests"}</h3>
+          
+        <h3>Pending {user.isDriver === "driver" ? "offers" : "requests"}</h3>
+        <h3>Rejected {user.isDriver === "driver" ? "offers" : "requests"}</h3>
       </section>
     </>
   );
