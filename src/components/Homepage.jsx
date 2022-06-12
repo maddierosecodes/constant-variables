@@ -1,17 +1,17 @@
-import { useContext } from 'react';
-import { UserContext } from '../contexts/User';
-import { Link } from 'react-router-dom';
-import profilePlaceholder from '../assets/images/profile-placeholder.png';
+import { useContext } from "react";
+import { UserContext } from "../contexts/User";
+import { Link } from "react-router-dom";
+import profilePlaceholder from "../assets/images/profile-placeholder.png";
 
 export default function Homepage() {
   const { user } = useContext(UserContext);
   return (
     <>
-      <section id='profile-section'>
+      <section id="profile-section">
         <nav>
           <Link
-            className='f4 fw6 db purple no-underline underline-hover'
-            to='/'
+            className="f4 fw6 db purple no-underline underline-hover"
+            to="/"
           >
             Back to homepage
           </Link>
@@ -19,24 +19,24 @@ export default function Homepage() {
         <header>
           <h2>Hello, {user.username}</h2>
         </header>
-        <img id='profile-img' src={profilePlaceholder} alt='user profile' />
+        <img id="profile-img" src={profilePlaceholder} alt="user profile" />
         <p>Your role is {user.role}</p>
         <p>You are currently offering rides from {user.postcode}</p>
         <p>You may post a ride or search for rides already posted.</p>
         <Link
-          className='ride-link f4 fw6 db black link hover-purple underline-hover'
-          to='/post-a-ride'
+          className="ride-link f4 fw6 db black link hover-purple underline-hover"
+          to="/post"
         >
           Post a ride
         </Link>
         <Link
-          className='ride-link f4 fw6 db black link hover-purple underline-hover'
-          to='/rides'
+          className="ride-link f4 fw6 db black link hover-purple underline-hover"
+          to="/rides"
         >
           View all rides
         </Link>
       </section>
-      <section id='current-rides'>
+      <section id="current-rides">
         <h2>Current rides</h2>
         <article className='mw5 center bg-white br3 pa3 pa4-ns mv3 ba b--black-10'>
           <div className='tc'>

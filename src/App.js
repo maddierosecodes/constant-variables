@@ -1,9 +1,7 @@
 import './App.css';
-import { UserContext } from './contexts/User';
 import { useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
-
-import Splash from './components/Splash';
+import { Route, Routes, Link } from 'react-router-dom';
+import { UserContext } from './contexts/User';
 import Login from './components/Login';
 import Header from './components/Header';
 import Homepage from './components/Homepage';
@@ -23,6 +21,20 @@ function App() {
     <UserContext.Provider value={{ user, setUser }}>
       <main className='App'>
         <Header />
+        <nav>
+          <Link
+            className='f4 fw6 db purple no-underline underline-hover'
+            to='/login'
+          >
+            {user.isLoggedIn ? '' : 'Log in here'}
+          </Link>
+          <Link
+            className='f4 fw6 db purple no-underline underline-hover'
+            to='/sign-up'
+          >
+            {user.isLoggedIn ? '' : 'Sign up here'}
+          </Link>
+        </nav>
 
         <Routes>
           <Route path='/' element={<Splash />}></Route>
