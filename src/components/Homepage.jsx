@@ -82,7 +82,7 @@ export default function Homepage() {
         {/* our posts */}
         {userPosts ? (
           userPosts.map((ride) => {
-            return <RideCard ride={ride} key={ride.uid} />;
+            return <RideCard ride={ride} key={ride.uid} isOwn={true} />;
           })
         ) : (
           <p>No rides currently</p>
