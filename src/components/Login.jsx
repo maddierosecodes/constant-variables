@@ -1,46 +1,66 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "../contexts/User";
+import { authenticateUser } from "../firebase/functions/auth";
+import { getProfile } from "../firebase/functions/read";
 
 export default function Login() {
-  const navigate = useNavigate();
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const { setUser } = useContext(UserContext);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    navigate('/home', { replace: false });
-  };
+	const navigate = useNavigate();
 
-  return (
-    <section>
-      <Link className='f4 fw6 db purple no-underline underline-hover' to='/'>
-        Back to homepage
-      </Link>
-      <form class='measure center login-form'>
-        <label class='db fw6 lh-copy f6' for='email-address'>
-          Email
-        </label>
-        <input
-          class='pa2 input-reset ba bg-transparent w-100'
-          type='email'
-          name='email-address'
-          id='email-address'
-        />
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		authenticateUser(email, password)
+			.then(({ email, uid }) => {
+				console.log({ uid });
+				return getProfile("DlvzNfVsaZXHeRV8dujxHWg3ehD3");
+			})
+			.then((user) => {
+				setUser(user);
+				navigate("/home", { replace: true });
+			});
+	};
 
-        <label class='db fw6 lh-copy f6' for='password'>
-          Password
-        </label>
-        <input
-          class='b pa2 input-reset ba bg-transparent w-100'
-          type='password'
-          name='password'
-          id='password'
-        />
+	return (
+		<section>
+			<Link className='f4 fw6 db purple no-underline underline-hover' to='/'>
+				Back to homepage
+			</Link>
+			<form className='measure center login-form'>
+				<label className='db fw6 lh-copy f6' htmlFor='email-address'>
+					Email
+				</label>
+				<input
+					className='pa2 input-reset ba bg-transparent hover-bg-black hover-yellow w-100'
+					type='email'
+					name='email-address'
+					id='email-address'
+					value={email}
+					onChange={(e) => setEmail(e.target.value)}
+				/>
 
-        <button
-          onClick={handleSubmit}
-          className='f6 link  ph3 pv2 mb2 dib white bg-black'
-        >
-          Log in
-        </button>
-      </form>
-    </section>
-  );
+				<label className='db fw6 lh-copy f6' htmlFor='password'>
+					Password
+				</label>
+				<input
+					className='b pa2 input-reset ba bg-transparent hover-bg-black hover-yellow w-100'
+					type='password'
+					name='password'
+					id='password'
+					value={password}
+					onChange={(e) => setPassword(e.target.value)}
+				/>
+
+				<button
+					onClick={handleSubmit}
+					className='f6 link  ph3 pv2 mb2 dib white bg-black'
+				>
+					Log in
+				</button>
+			</form>
+		</section>
+	);
 }
