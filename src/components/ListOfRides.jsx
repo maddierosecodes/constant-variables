@@ -35,7 +35,13 @@ export default function ListOfRides() {
               <p>{listing.title}</p>
               <p>
                 Posted By:
-                <Link to="#">{listing.createdBy}</Link>
+                <Link
+                  to={`/profile/${isDriver ? "passenger" : "driver"}/${
+                    listing.uid
+                  }`}
+                >
+                  {listing.createdBy}
+                </Link>
               </p>
               <p>
                 Journey Start: {listing.postcodeStart} Destination:{" "}
@@ -54,7 +60,7 @@ export default function ListOfRides() {
                 onClick={() =>
                   navigate(
                     `/profile/${isDriver ? "passenger" : "driver"}/${
-                      listing.createdBy
+                      listing.uid
                     }`
                   )
                 }
