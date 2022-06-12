@@ -36,7 +36,7 @@ export const getProfile = (uid) => {
 };
 
 export const getOtherProfile = (uid, role) => {
-    console.log('uid, role: ', uid, role);
+  console.log("uid, role: ", uid, role);
   return getDoc(doc(db, `/app/users/${role}s`, uid))
     .then((doc) => {
       const data = doc.data();
@@ -72,15 +72,17 @@ export const fetchListings = (collectionName) => {
 };
 
 export const fetchSingleListing = (rideID, type) => {
-    console.log('rideID, type: ', rideID, type);
-    return getDoc(doc(db, `/app/listings/${type}s`, rideID))
+  console.log("rideID, type: ", rideID, type);
+  return getDoc(doc(db, `/app/listings/${type}s`, rideID))
     .then((doc) => {
       const data = doc.data();
-      console.log('data: ', data);
 
+      data.posted = data.createdAt.seconds;
+      data.date = data.date.seconds;
       data.uid = doc.id;
 
+      console.log("data: ", data);
       return data;
     })
     .catch((err) => console.log(err));
-}
+};
