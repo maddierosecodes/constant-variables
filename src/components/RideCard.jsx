@@ -29,7 +29,11 @@ function RideCard({ ride, isOwn = false }) {
               return (
                 <span key={person.uid}>
                   <p>{person.username}</p>{" "}
-                  <Link to={`/profile/${person.type}/${person.uid}`}>
+                  <Link
+                    to={`/profile/${
+                      person.type === "request" ? "driver" : "passenger"
+                    }/${person.uid}`}
+                  >
                     View Profile
                   </Link>
                   <>

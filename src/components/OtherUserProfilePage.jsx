@@ -4,7 +4,7 @@ import profilePlaceholder from "../assets/images/profile-placeholder.png";
 import { getOtherProfile } from "../firebase/functions/read";
 import { toOutcode } from "postcode";
 
-export default function ProfilePage() {
+export default function OtherUserProfilePage() {
   const { role, userID } = useParams();
   const [profileInfo, setProfileInfo] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -13,7 +13,7 @@ export default function ProfilePage() {
 
   useEffect(() => {
     getOtherProfile(userID, role).then((userInfo) => {
-      console.log(userInfo);
+      console.log({ userInfo });
       setProfileInfo(userInfo);
       setIsLoading(false);
     });

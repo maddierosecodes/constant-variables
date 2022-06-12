@@ -39,7 +39,9 @@ export const getOtherProfile = (uid, role) => {
   console.log("uid, role: ", uid, role);
   return getDoc(doc(db, `/app/users/${role}s`, uid))
     .then((doc) => {
+      console.log({ doc });
       const data = doc.data();
+      console.log(data, "<<<<<<<<<<<<<<<,");
 
       data.uid = doc.id;
 
