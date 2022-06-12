@@ -22,10 +22,10 @@ function RideCard({ ride }) {
         <h2 className="f4">{ride.body}</h2>
         <hr className="mw3 bb bw1 b--black-10" />
 
-        {ride.interested ? (
+        {ride.interestedUserIDs ? (
           <>
             <p>People Interested</p>
-            {ride.interested.map((person) => {
+            {ride.interestedUserIDs.map((person) => {
               return (
                 <span key={person.uid}>
                   <p>{person.username}</p>{" "}
