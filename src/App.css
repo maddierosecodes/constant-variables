@@ -1,11 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Lato&family=Josefin+Sans&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Josefin+Sans&display=swap');
 
 :root {
   --lowlight: rgb(65, 64, 66);
   --primary-color: rgb(149, 149, 244);
   /* --highlight: rgb(83, 244, 148); */
   --textColor: #35302c;
-
   --bgColor: #fffaeb;
   --pinkHighlight: #ea9999;
   --green: #50916c;
@@ -24,12 +23,12 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Josefin Sans", sans-serif;
+  font-family: 'Josefin Sans', sans-serif;
 }
 
 a,
 p {
-  font-family: "Lato", sans-serif;
+  font-family: 'Lato', sans-serif;
 }
 
 h2 {
@@ -135,9 +134,9 @@ form button {
 }
 
 .navLink {
-  font-family: "Nanum Gothic", sans-serif;
-  font-family: "Roboto Condensed", sans-serif;
-  font-family: "Ubuntu Condensed", sans-serif;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-family: 'Ubuntu Condensed', sans-serif;
   text-decoration: none;
   color: var(--textColor);
   padding-top: 0.7rem;
