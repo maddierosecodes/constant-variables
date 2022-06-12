@@ -16,11 +16,6 @@ export default function ListOfRides() {
     });
   }, [isDriver]); // for testing, remove dependency once userContext set up.
 
-  function acceptListing(listingID) {
-    console.log(listingID);
-    // to add accept listing funtionailty once database connection set up
-  }
-
   return (
     <div>
       <h2>List of {isDriver ? "Requests" : "Offers"}</h2>
@@ -32,12 +27,11 @@ export default function ListOfRides() {
         {listItems.map((listing) => {
           return (
             <li className="ride-card" key={listing.uid}>
-              <p>{listing.title}</p>
               <p>
                 Posted By:
                 <Link
                   to={`/profile/${isDriver ? "passenger" : "driver"}/${
-                    listing.uid
+                    listing.creatorId
                   }`}
                 >
                   {listing.createdBy}
@@ -53,14 +47,20 @@ export default function ListOfRides() {
               <p>
                 Date and time: {new Date(listing.date * 1000).toLocaleString()}
               </p>
-              <button onClick={() => acceptListing(listing.id)}>
-                Accept {isDriver ? "Request" : "Offer"}
+              <button  onClick={() =>
+                  navigate(
+                    `/rides/${isDriver ? "request" : "offer"}/${
+                      listing.uid
+                    }`
+                  )
+                }>
+                More Information
               </button>
               <button
                 onClick={() =>
                   navigate(
                     `/profile/${isDriver ? "passenger" : "driver"}/${
-                      listing.uid
+                      listing.creatorId
                     }`
                   )
                 }

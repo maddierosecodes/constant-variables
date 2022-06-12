@@ -11,6 +11,7 @@ import AdditionalSignUp from "./components/AdditionalSignUp";
 import Splash from "./components/Splash";
 import PostRide from "./components/PostRide";
 import OtherUserProfilePage from "./components/OtherUserProfilePage";
+import SingleAdPage from "./components/SingleAdPage";
 
 function App() {
   const [user, setUser] = useState({
@@ -39,6 +40,10 @@ function App() {
           <Route
             path="/profile/:role/:userID"
             element={<OtherUserProfilePage />}
+          />
+          <Route
+            path="/rides/:type/:rideID"
+            element={<SingleAdPage />}
           />
         </Routes>
       </main>
