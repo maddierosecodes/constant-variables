@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 function RideCard({ ride }) {
   return (
     <article className="mw5 center bg-white br3 pa3 pa4-ns mv3 ba b--black-10">
@@ -13,7 +13,10 @@ function RideCard({ ride }) {
             {ride.interested.map((person) => {
               return (
                 <span>
-                  <p>{person.username}</p>
+                  <p>{person.username}</p>{" "}
+                  <Link to={`/profile/${person.type}/${person.uid}`}>
+                    View Profile
+                  </Link>
                   <button type={"default"}>Accept</button>
                   <button type={"default"}>Reject</button>
                 </span>

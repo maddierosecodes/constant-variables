@@ -59,7 +59,7 @@ export const registerInterest = (rideID, uid, username, type) => {
   const rideRef = doc(db, path, rideID);
 
   return updateDoc(rideRef, {
-    interested: arrayUnion({ uid, username }),
+    interested: arrayUnion({ uid, username, type }),
   })
     .then(console.log)
     .catch(console.log);
