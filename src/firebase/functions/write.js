@@ -1,5 +1,12 @@
 import db from "../index";
-import { doc, collection, addDoc, setDoc } from "firebase/firestore";
+import {
+  doc,
+  collection,
+  addDoc,
+  setDoc,
+  updateDoc,
+  arrayUnion,
+} from "firebase/firestore";
 
 // Creates a new document from a document object, path and specfied unique id- for users
 export const writeUserData = (document, path, uid) => {
@@ -42,5 +49,18 @@ export const postAdvert = (isDriver, document = exampleListing) => {
     .then((res) => {
       console.log(res, "success!");
     })
+    .catch(console.log);
+};
+
+export const registerInterest = (rideID, uid, username, type) => {
+  console.log(rideID, uid, type);
+  const path = `/app/listings/${type}s`;
+
+  const rideRef = doc(db, path, rideID);
+
+  return updateDoc(rideRef, {
+    interested: arrayUnion({ uid, username }),
+  })
+    .then(console.log)
     .catch(console.log);
 };
