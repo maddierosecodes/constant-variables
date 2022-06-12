@@ -1,23 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { fetchOffers } from "../firebase/functions/read";
+import { fetchListings } from "../firebase/functions/read";
 
 export default function ListOfRides() {
   const [listItems, setListItems] = useState([]);
-  const [isDriver, setIsDriver] = useState(false); // for testing, probably not needed once userContext set up.
+  const [isDriver, setIsDriver] = useState(true); // for testing, probably not needed once userContext set up.
 
   const navigate = useNavigate();
-  // if(isDriver) fetch from requests collection, else fetch from offers collection
+
   useEffect(() => {
     console.log("hi");
-    // once listing acceptance status set up only want to return listings not accepted
-    if (isDriver) {
-      setListItems(requests);
-    } else {
-      fetchOffers().then((offers) => {
-        setListItems(offers);
-      });
-    }
+    const collectionName = isDriver ? "requests" : "offers";
+    fetchListings(collectionName).then((listings) => {
+      setListItems(listings);
+    });
   }, [isDriver]); // for testing, remove dependency once userContext set up.
 
   function acceptListing(listingID) {
@@ -27,7 +23,7 @@ export default function ListOfRides() {
 
   return (
     <div>
-      <h2>List Of {isDriver ? "Requests" : "Offers"}</h2>
+      <h2>List of {isDriver ? "Requests" : "Offers"}</h2>
       <button onClick={() => setIsDriver(!isDriver)}>
         Driver to {`${!isDriver}`}
       </button>
@@ -35,7 +31,7 @@ export default function ListOfRides() {
       <ul>
         {listItems.map((listing) => {
           return (
-            <li className="ride-card" key={listing.id}>
+            <li className="ride-card" key={listing.uid}>
               <p>{listing.title}</p>
               <p>
                 Posted By:
@@ -45,8 +41,12 @@ export default function ListOfRides() {
                 Journey Start: {listing.postcodeStart} Destination:{" "}
                 {listing.destination}
               </p>
-              <p>Posted: {new Date((listing.createdAt * 1000)).toLocaleString()}</p>
-              <p>Date and time: {new Date((listing.date * 1000)).toLocaleString()}</p>
+              <p>
+                Posted: {new Date(listing.createdAt * 1000).toLocaleString()}
+              </p>
+              <p>
+                Date and time: {new Date(listing.date * 1000).toLocaleString()}
+              </p>
               <button onClick={() => acceptListing(listing.id)}>
                 Accept {isDriver ? "Request" : "Offer"}
               </button>
